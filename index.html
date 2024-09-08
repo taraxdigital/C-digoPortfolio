@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+ 
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Portfolio</title>
+</head>
+<body>
+    <main>
+    <div>
+          <!-- MENU ENCABEZADO -->
+    <div class="contenedor-header">
+        <header>
+            <div class="logo">
+                <a href="#">Elena</a>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#inicio" onclick="seleccionar()">INICIO</a></li>
+                    <li><a href="#sobremi" onclick="seleccionar()">SOBRE MI</a></li>
+                    <li><a href="#skills" onclick="seleccionar()">SKILLS</a></li>
+                    <li><a href="#curriculum" onclick="seleccionar()">CURRICULUM</a></li>
+                    <li><a href="#portfolio" onclick="seleccionar()">PORTFOLIO</a></li>
+                    <li><a href="#contacto" onclick="seleccionar()">CONTACTO</a></li>
+                </ul>
+            </nav>
+            <div class="nav-responsive" onclick="mostrarOcultarMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </header>
+    </div>
+ 
+<img src="" alt="" srcset="">
+    <!-- SECCION INICIO -->
+    <section id="inicio" class="inicio">
+        <div class="contenido-banner">
+            <div class="contenedor-img">
+                <img src="img/yo.jpg" alt="">
+            </div>
+            <h1>Elena Perandrés Molino</h1>
+            <h2>Creativa digital</h2>
+            <div class="redes">
+                <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      
+              
+                <a href="https://www.linkedin.com/in/elena-perandres-molino/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://www.youtube.com/@spinning-music_bySatarax"  target="_blank"><i class="fa-brands fa-square-youtube"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION SOBRE MI -->
+    <section id="sobremi" class="sobremi">
+        <div class="contenido-seccion">
+            <h2>Sobre Mí</h2>
+            <p><span>Hola, soy Elena. <br></span> Me encanta la tecnología y la creación de contenido original. Mi proyecto en YouTube, music for spinning, cuenta con más de 13.000 suscriptores y millones de reproducciones. En otro canal de youtube, lo he destinado a historia. Donde subo videos de historia por etapas y tengo un curso publicado en Udemi, dedicado a superar el acceso a la secundaria, en la rama de historia.<br>He trabajado en diferentes gimnasios preparando clases audiovisuales y he diseñado mi propia web en WordPress, monetizada con Adsense.
+
+                Habilidades y experiencia:
+                
+                Certificación de profesionalidad, en desarrollo de aplicaciones web.
+                Creación de contenido para YouTube.
+                Experiencia en diseño web con WordPress.
+                Figma.
+                Habilidades en marketing digital, incluyendo Google Ads, Analytics, Search Console, SEO/SEM, diseño UX/UI y community manager.
+               
+                
+                <!-- datos personales -->
+                <div class="col">
+                    <h3>Datos Personales</h3>
+                    <ul>
+                        <li>
+                      
+                        <li>
+                            <strong>Teléfono</strong>
+                           680613291
+                        </li>
+                        <li>
+                            <strong>Email</strong>
+                          tarax.desing@gmail.com
+                        </li>
+                        <li>
+                        
+                        <li>
+                            <strong>Dirección</strong>
+                           Santa Fe. Granada.
+                        </li>
+                        <li>
+                            <strong>Cargo</strong>
+                            <span>FREELANCE</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- intereses -->
+                <div class="col">
+                    <h3>Intereses</h3>
+                    <div class="contenedor-intereses">
+                        <div class="interes">
+                            <i class="fa-solid fa-gamepad"></i>
+                            <span>Inteligencia Artificial</span>
+                        </div>
+                        <div class="interes">
+                            <i class="fa-solid fa-headphones"></i>
+                            <span>Música</span>
+                        </div>
+                        <div class="interes">
+                            <i class="fa-solid fa-plane"></i>
+                            <span>Pasear</span>
+                        </div>
+                        <div class="interes">
+                            <i class="fa-brands fa-apple"></i>
+                            <span>Aprender</span>
+                        </div>
+                     
+                        
+                    </div>
+                </div>
+            </div>
+     
+            <a href="https://drive.google.com/file/d/196YACbLagLO-kZv777f3eUg_ZGHKLjYf/view?usp=sharing" target="_blank">
+                <button id="open-pdf">
+                  Descargar CV <i class="fa-solid fa-download"></i>
+                  <span class="overlay"></span>
+                </button>
+              </a>
+        </div>
+    </section>
+   
+    <!-- SECCION SKILLS -->
+    <section class="skills" id="skills">
+        <div class="contenido-seccion">
+            <h2>Skills</h2>
+            <div class="fila">
+                <!-- Technical Skill -->
+                <div class="col">
+                    <h3>Technical Skills</h3>
+                    <div class="skill">
+                        <span>Javascript</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>45%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>HTML & CSS</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>90%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>VideoStudio</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>100%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Wordpress</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>81%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Mixmeister</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Professional Skills -->
+                <div class="col">
+                    <h3>Professional Skills</h3>
+                    <div class="skill">
+                        <span>Comunicación</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>80%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Trabajo en Equipo</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>70%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Creatividad</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>99%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Dedicación</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>95%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Figma</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>94%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION CURRICULUM -->
+    <section id="curriculum" class="curriculum">
+        <div class="contenido-seccion">
+            <h2>Curriculum</h2>
+            <div class="fila">
+                <div class="col izquierda">
+                    <h3>Educación</h3>
+                    <div class="item izq">
+                        <h4>Arte y Multimedia</h4>
+                        <span class="casa">Academia Atlántida</span>
+                        <span class="fecha">2024</span>
+                        <p>Certificado de profesionalidad. Desarrollo de aplicaciones con tecnologias web.</p>
+                        <div class="conectori">
+                            <div class="circuloi"></div>
+                        </div>
+                    </div>
+                    <div class="item izq">
+                        <h4>Arte y Multimedia</h4>
+                        <span class="casa">Cursos Prospera</span>
+                        <span class="fecha">2022</span>
+                        <p>Digitalización aplicada al sector productivo, con Cepyme.</p>
+                        <div class="conectori">
+                            <div class="circuloi"></div>
+                        </div>
+                    </div>
+                    <div class="item izq">
+                        <h4>Arte y Multimedia</h4>
+                        <span class="casa">Generalitat de Cataluña</span>
+                        <span class="fecha">2022</span>
+                        <p>Seo/Sem y community manager</p>
+                        <div class="conectori">
+                            <div class="circuloi"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col derecha">
+                    <h3>Experiencia de trabajo</h3>
+                    <div class="item der">
+                        <h4>Redes Sociales</h4>
+                        <span class="casa">Bodegas Copa Llena</span>
+                        <span class="fecha">2022</span>
+                        <p>Diseño y creación del logo. Gestión de anuncios en Youtube, Facebook e Instagram</p>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+                    <div class="item der">
+                        <h4>Community manager</h4>
+                        <span class="casa">Corbatas fuera</span>
+                        <span class="fecha">2023</span>
+                        <p>Diseño logo de la compañía y gestión de redes sociales.</p>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+                    <div class="item der">
+                        <h4>Directora</h4>
+                        <span class="casa">Music for spinning</span>
+                        <span class="fecha">2013- actualidad</span>
+                        <p>Creación de la web oficial, canal de youtube y gestión de anuncios y redes sociales.</p>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION PORTFOLIO -->
+    <section id="portfolio" class="portfolio">
+        <div class="contenido-seccion">
+            <h2>PORTFOLIO</h2>
+            <div class="galeria">
+                <div class="proyecto">
+                    <img src="img/p1.jpg" alt="">
+                    <div class="overlay">
+                        <h3>Diseño Creativo</h3>
+                        <p>Fotografía</p>
+                    </div>
+                </div>
+                <div class="proyecto">
+                    <img src="img/2.png" alt="">
+                    <div class="overlay">
+                        <h3>Diseño Creativo</h3>
+                        <p>De las páginas a la pantalla</p>
+                    </div>
+                </div>
+                <div class="proyecto">
+                    <img src="img/Tarax.desing.jpeg" alt="">
+                    <div class="overlay">
+                        <h3>Diseño Creativo</h3>
+                        <p>Tarax</p>
+                    </div>
+                </div>
+                <div class="proyecto">
+                    <img src="img/behance.jpg" alt="">
+                    <div class="overlay">
+                        <h3>Diseño Creativo</h3>
+                        <p>behance</p>
+                    </div>
+                </div>
+                <div class="proyecto">
+                    <img src="img/partida.png" alt="">
+                    <div class="overlay">
+                        <h3>Diseño Creativo</h3>
+                        <p>Creativa</p>
+                    </div>
+                </div>
+              
+                    <div class="proyecto">
+                        <img src="img/grid.png" alt="">
+                        <div class="overlay">
+                            <h3>Diseño Creativo</h3>
+                            <p>Trabajos</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION CONTACTO -->
+    <section id="contacto" class="contacto">
+        <div class="contenido-seccion">
+            <h2>CONTACTO</h2>
+            <div class="fila">
+                <!-- Formulario -->
+                <div class="col">
+                    <input type="text" placeholder="Tú Nombre">
+                    <input type="text" placeholder="Número telefónico">
+                    <input type="text" placeholder="Dirección de correo">
+                    <input type="text" placeholder="Tema">
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Mensaje"></textarea>
+                    <button>
+                        Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
+                        <span class="overlay"></span>
+                    </button>
+                </div>
+                <!-- Mapa -->
+                <div class="col">
+                    <img src="img/diseno-UX-_-MTP.jpg" alt=""> 
+                    <div class="info">
+                        <ul>
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                             Santa fe.
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-mobile-screen"></i>
+                                Llamanos: 680 613 291.
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                Email:  tarax.desing@gmail.com
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+        <a href="#inicio" class="arriba">
+            <i class="fa-solid fa-angles-up"></i>
+        </a>
+    
+    </div>
+</main>
+    <script src="script.js"></script>
+</body>
+</html>
