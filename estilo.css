@@ -83,11 +83,16 @@ html{
 }
 .inicio .contenido-banner img{
     margin-top: 40px;
-    border: 10px solid #1CB698;
+    border: 8px solid #1CB698;
     display: block;
     width: 80%;
     margin: auto;
     border-radius: 100%;
+}
+.inicio .contenido-banner .blanco{
+    border: none;
+    margin: 10px auto;
+    
 }
 .inicio .contenido-banner h1{
    
