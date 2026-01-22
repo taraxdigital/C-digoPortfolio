@@ -43,7 +43,7 @@ html{
 }
 .contenedor-header header nav ul li a{
     text-align: none;
-    color: #fff;
+    color: #000000;
     margin: 0 15px;
     padding: 3px;
     transition: .5s;
