@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elena Portfolio 3D | IA & Diseño Inmersivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #b89fff;
+            --secondary: #00e3fd;
+            --surface: #050505;
+            --accent: #ff3e8d;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--surface);
+            color: white;
+            overflow-x: hidden;
+            perspective: 1200px;
+        }
+
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+
+        /* 3D Tilt Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tilt-card:hover {
+            border-color: var(--primary);
+        }
+        .tilt-content {
+            transform: translateZ(50px);
+        }
+
+        /* Floating 3D Cube */
+        .cube-container {
+            width: 100px;
+            height: 100px;
+            perspective: 1000px;
+        }
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 20s infinite linear;
+        }
+        .cube-face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--primary);
+            background: rgba(184, 159, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+            backdrop-filter: blur(2px);
+        }
+        .front  { transform: rotateY(0deg) translateZ(50px); }
+        .back   { transform: rotateY(180deg) translateZ(50px); }
+        .right  { transform: rotateY(90deg) translateZ(50px); }
+        .left   { transform: rotateY(-90deg) translateZ(50px); }
+        .top    { transform: rotateX(90deg) translateZ(50px); }
+        .bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+        @keyframes rotateCube {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* Floating Animation */
+        .float-3d {
+            animation: float3d 6s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+        @keyframes float3d {
+            0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); }
+            50% { transform: translateY(-20px) rotateX(10deg) rotateY(10deg); }
+        }
+
+        /* Mesh Gradients */
+        .bg-mesh {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(184, 159, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 227, 253, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 62, 141, 0.05) 0%, transparent 50%);
+        }
+
+        /* 3D Text */
+        .text-3d {
+            text-shadow: 
+                0 1px 0 #ccc, 
+                0 2px 0 #c9c9c9, 
+                0 3px 0 #bbb, 
+                0 4px 0 #b9b9b9, 
+                0 5px 0 #aaa, 
+                0 6px 1px rgba(0,0,0,.1), 
+                0 0 5px rgba(0,0,0,.1), 
+                0 1px 3px rgba(0,0,0,.3), 
+                0 3px 5px rgba(0,0,0,.2), 
+                0 5px 10px rgba(0,0,0,.25), 
+                0 10px 10px rgba(0,0,0,.2), 
+                0 20px 20px rgba(0,0,0,.15);
+        }
+
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.5);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .scroll-indicator {
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+        .scroll-indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: white;
+            animation: scrollLine 2s infinite;
+        }
+        @keyframes scrollLine {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(300%); }
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+    </style>
+</head>
+<body class="bg-mesh">
+    <div id="cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-headline font-black tracking-tighter text-[#b89fff]">
+                ELENA<span class="text-white">.</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#inicio" class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 hover:text-white transition-colors">Inicio</a>
+                <a href="#capacidades" class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 hover:text-white transition-colors">Expertise</a>
+                <a href="#proyectos" class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 hover:text-white transition-colors">Proyectos</a>
+                <a href="mailto:helenaperand@gmail.com" class="bg-white text-black px-6 py-2 rounded-full font-bold uppercase text-[9px] tracking-widest hover:scale-110 transition-all">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="inicio" class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-6">
+            <!-- 3D Background Elements -->
+            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-[#b89fff]/10 rounded-full blur-[120px] animate-pulse"></div>
+            <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#00e3fd]/10 rounded-full blur-[120px] animate-pulse" style="animation-delay: 2s;"></div>
+
+            <!-- Floating 3D Cube -->
+            <div class="absolute top-1/3 right-1/4 hidden lg:block float-3d">
+                <div class="cube-container">
+                    <div class="cube">
+                        <div class="cube-face front">AI</div>
+                        <div class="cube-face back">UX</div>
+                        <div class="cube-face right">WEB</div>
+                        <div class="cube-face left">3D</div>
+                        <div class="cube-face top">DEV</div>
+                        <div class="cube-face bottom">IA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center z-10">
+                <div class="mb-8 inline-flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-2 rounded-full backdrop-blur-md">
+                    <span class="w-2 h-2 rounded-full bg-[#00e3fd] shadow-[0_0_10px_#00e3fd]"></span>
+                    <span class="text-[9px] uppercase tracking-[0.4em] font-bold text-gray-300">Diseño Estratégico & IA Generativa</span>
+                </div>
+                
+                <h1 class="font-headline font-black text-[15vw] md:text-[12rem] leading-[0.85] tracking-tighter text-white mb-12 transform-gpu">
+                    ELENA<br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#b89fff] to-[#00e3fd]">PERANDRÉS</span>
+                </h1>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-12 mt-8">
+                    <p class="font-headline text-lg md:text-xl text-gray-400 max-w-md text-center md:text-left leading-relaxed">
+                        Transformando la complejidad técnica en <span class="text-white font-medium">experiencias digitales inmersivas</span> y marcas de alto impacto.
+                    </p>
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="scroll-indicator"></div>
+                        <span class="text-[8px] uppercase tracking-[0.5em] text-gray-500 font-bold">Scroll</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Expertise Section -->
+        <section id="capacidades" class="py-32 px-6 max-w-7xl mx-auto">
+            <div class="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.5em] text-[#b89fff] mb-4 block">Capacidades</span>
+                    <h2 class="font-headline font-bold text-6xl md:text-8xl tracking-tighter leading-none">
+                        EL ARTE DE <br/>
+                        <span class="text-white/20">LO POSIBLE.</span>
+                    </h2>
+                </div>
+                <p class="text-gray-500 max-w-xs text-sm uppercase tracking-widest leading-loose">
+                    Fusionando el diseño visual de vanguardia con la potencia de la inteligencia artificial.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="tilt-card p-10 rounded-[2rem] group cursor-pointer" onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-content">
+                        <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 text-[#b89fff] group-hover:bg-[#b89fff] group-hover:text-black transition-all duration-500">
+                            <i data-lucide="layout" size="28"></i>
+                        </div>
+                        <h3 class="font-headline text-2xl font-bold mb-4">Web Estratégica</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                            Especialista en WordPress y Elementor. Sitios web diseñados para convertir y escalar negocios.
+                        </p>
+                        <div class="h-1 w-0 group-hover:w-full bg-[#b89fff] transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="tilt-card p-10 rounded-[2rem] group cursor-pointer" onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-content">
+                        <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 text-[#00e3fd] group-hover:bg-[#00e3fd] group-hover:text-black transition-all duration-500">
+                            <i data-lucide="cpu" size="28"></i>
+                        </div>
+                        <h3 class="font-headline text-2xl font-bold mb-4">IA Generativa</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                            Integración de modelos LLM e IA visual para optimizar flujos creativos y automatización de contenido.
+                        </p>
+                        <div class="h-1 w-0 group-hover:w-full bg-[#00e3fd] transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="tilt-card p-10 rounded-[2rem] group cursor-pointer" onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)">
+                    <div class="tilt-content">
+                        <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 text-[#ff3e8d] group-hover:bg-[#ff3e8d] group-hover:text-black transition-all duration-500">
+                            <i data-lucide="code-2" size="28"></i>
+                        </div>
+                        <h3 class="font-headline text-2xl font-bold mb-4">Frontend Lab</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                            Desarrollo de interfaces interactivas con Web Audio API, animaciones 3D y lógica avanzada en JS.
+                        </p>
+                        <div class="h-1 w-0 group-hover:w-full bg-[#ff3e8d] transition-all duration-500"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Showcase Grid -->
+        <section id="proyectos" class="py-32 bg-white text-black overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center justify-between mb-20 gap-8">
+                    <h2 class="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-none">
+                        SHOW<br/><span class="text-gray-300">CASE.</span>
+                    </h2>
+                    <div class="text-right">
+                        <p class="font-bold text-xs uppercase tracking-[0.4em] mb-4">Selección de Proyectos</p>
+                        <p class="text-gray-500 max-w-xs text-sm leading-relaxed">
+                            Una mirada a los trabajos donde la tecnología y el diseño se encuentran para crear algo único.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Project 1 -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-[2.5rem] aspect-[16/10] bg-gray-100">
+                            <img src="https://picsum.photos/seed/p1/1200/800" alt="Project" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" referrerPolicy="no-referrer">
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white text-black px-8 py-3 rounded-full font-bold uppercase text-[10px] tracking-widest transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">Ver Proyecto</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex justify-between items-start">
+                            <div>
+                                <h3 class="font-headline text-3xl font-bold tracking-tight">Audio Engine V2</h3>
+                                <p class="text-gray-500 uppercase text-[10px] font-bold tracking-widest mt-2">Web Audio API / UI Design</p>
+                            </div>
+                            <span class="text-4xl font-headline font-light text-gray-200">01</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="group cursor-pointer md:mt-24">
+                        <div class="relative overflow-hidden rounded-[2.5rem] aspect-[16/10] bg-gray-100">
+                            <img src="https://picsum.photos/seed/p2/1200/800" alt="Project" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" referrerPolicy="no-referrer">
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="bg-white text-black px-8 py-3 rounded-full font-bold uppercase text-[10px] tracking-widest transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">Ver Proyecto</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex justify-between items-start">
+                            <div>
+                                <h3 class="font-headline text-3xl font-bold tracking-tight">AI Branding Lab</h3>
+                                <p class="text-gray-500 uppercase text-[10px] font-bold tracking-widest mt-2">Generative Art / Strategy</p>
+                            </div>
+                            <span class="text-4xl font-headline font-light text-gray-200">02</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section with 3D Background -->
+        <section class="py-40 px-6 relative overflow-hidden flex flex-col items-center justify-center text-center">
+            <div class="absolute inset-0 bg-mesh opacity-50"></div>
+            
+            <!-- Rotating 3D Rings -->
+            <div class="absolute w-[600px] h-[600px] border border-white/5 rounded-full animate-[spin_20s_linear_infinite] pointer-events-none"></div>
+            <div class="absolute w-[400px] h-[400px] border border-white/10 rounded-full animate-[spin_15s_linear_infinite_reverse] pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <h2 class="font-headline font-black text-6xl md:text-9xl tracking-tighter leading-none mb-12">
+                    HAGAMOS ALGO<br/>
+                    <span class="italic text-[#b89fff]">MEMORABLE.</span>
+                </h2>
+                <a href="mailto:helenaperand@gmail.com" class="inline-block bg-[#b89fff] text-black px-12 py-6 rounded-full font-bold uppercase tracking-[0.2em] text-sm hover:scale-110 hover:shadow-[0_0_30px_#b89fff] transition-all">
+                    Empezar Proyecto
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 px-6 border-t border-white/5 text-center">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-xl font-headline font-black tracking-tighter text-[#b89fff]">
+                ELENA<span class="text-white">.</span>
+            </div>
+            <p class="text-gray-500 text-[9px] uppercase tracking-[0.4em]">© 2026 ELENA PERANDRÉS | INNOVACIÓN & DISEÑO</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i data-lucide="instagram" size="18"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i data-lucide="linkedin" size="18"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i data-lucide="twitter" size="18"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, .tilt-card, .group').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(4)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+
+        // 3D Tilt Logic
+        function handleTilt(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+
+        function resetTilt(card) {
+            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        }
+
+        // Parallax Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroText = document.querySelector('h1');
+            if (heroText) {
+                heroText.style.transform = `translateY(${scrolled * 0.2}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
