@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio de Elena Perandrés Molino, diseñadora web y especialista en marketing digital con experiencia en WordPress, Elementor, SEO, community management y frontend." />
+  <title>Elena Perandrés Molino | Portfolio Profesional</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=clash-display@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --bg: #07101f;
+      --bg-2: #0b1f3a;
+      --surface: rgba(11, 31, 58, 0.72);
+      --surface-2: rgba(11, 31, 58, 0.88);
+      --text: #eaf3ff;
+      --muted: rgba(234, 243, 255, 0.72);
+      --line: rgba(20, 184, 166, 0.18);
+      --blue: #0b1f3a;
+      --teal: #14b8a6;
+      --amber: #f2d574;
+      --shadow: 0 24px 60px rgba(0,0,0,.28);
+      --radius-xl: 1.4rem;
+      --radius-lg: 1rem;
+      --max: 1180px;
+      --font-body: 'Satoshi', sans-serif;
+      --font-display: 'Clash Display', sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:var(--font-body);
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(20,184,166,.14), transparent 24%),
+        radial-gradient(circle at top right, rgba(242,213,116,.12), transparent 20%),
+        linear-gradient(180deg, #081120 0%, var(--bg) 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    body::before, body::after{
+      content:'';
+      position:fixed;
+      inset:auto;
+      pointer-events:none;
+      z-index:0;
+      opacity:.55;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      filter:blur(14px);
+      background: radial-gradient(circle, rgba(20,184,166,.22), transparent 62%);
+      animation: floaty 12s ease-in-out infinite;
+    }
+    body::before{ left:-40px; top:18vh; }
+    body::after{
+      right:-55px;
+      bottom:12vh;
+      background: radial-gradient(circle, rgba(242,213,116,.20), transparent 62%);
+      animation-duration: 15s;
+    }
+    @keyframes floaty{
+      0%,100%{transform:translateY(0) translateX(0)}
+      50%{transform:translateY(-18px) translateX(12px)}
+    }
+    .container{
+      width:min(calc(100% - 2rem), var(--max));
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+    }
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%;height:auto}
+    .skip{
+      position:absolute;
+      left:-999px;
+      top:10px;
+      background:var(--amber);
+      color:#111;
+      padding:.7rem 1rem;
+      border-radius:999px;
+      z-index:20;
+    }
+    .skip:focus{left:1rem}
+
+    .header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(18px);
+      background:rgba(7,16,31,.62);
+      border-bottom:1px solid rgba(20,184,166,.15);
+    }
+    .header-inner{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .brand{display:flex;align-items:center;gap:.85rem;font-weight:700}
+    .brand-mark{
+      width:42px;height:42px;border-radius:50%;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--teal),var(--amber));
+      color:#04111d;
+      box-shadow:0 8px 20px rgba(20,184,166,.25);
+    }
+    .brand-text strong{display:block;font-size:.95rem;letter-spacing:.02em}
+    .brand-text span{display:block;font-size:.78rem;color:var(--muted)}
+    .nav{display:flex;gap:1.15rem;flex-wrap:wrap}
+    .nav a{
+      font-size:.92rem;
+      color:var(--muted);
+      position:relative;
+    }
+    .nav a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-.35rem;
+      width:100%;
+      height:2px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--teal),var(--amber));
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .22s ease;
+    }
+    .nav a:hover::after{transform:scaleX(1)}
+    .actions{display:flex;align-items:center;gap:.75rem}
+    .btn,.icon-btn{border:0;cursor:pointer}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.55rem;
+      padding:.95rem 1.2rem;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.92rem;
+      transition:.22s ease;
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,var(--teal),#0ea5a3);
+      color:#031018;
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px) scale(1.01);
+      box-shadow:0 18px 34px rgba(20,184,166,.22);
+    }
+    .btn-secondary{
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      border:1px solid rgba(20,184,166,.18);
+    }
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.09);
+      transform:translateY(-2px);
+    }
+    .icon-btn{
+      width:44px;height:44px;border-radius:50%;
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      border:1px solid rgba(20,184,166,.18);
+      display:grid;place-items:center;
+    }
+    .menu-btn{display:none}
+
+    section{
+      padding:clamp(4rem,7vw,6.5rem) 0;
+      position:relative;
+    }
+    .reveal{
+      opacity:0;
+      transform:translateY(34px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+    .reveal.is-visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .hero{
+      padding-top:clamp(3.5rem,6vw,5.5rem);
+      min-height:88vh;
+      display:flex;
+      align-items:center;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:2rem;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.45rem .8rem;
+      border-radius:999px;
+      background:rgba(20,184,166,.12);
+      border:1px solid rgba(20,184,166,.24);
+      color:#7ff7ea;
+      font-weight:700;
+      font-size:.78rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    h1,h2,h3{font-family:var(--font-display)}
+    h1{
+      font-size:clamp(3rem,7vw,5.6rem);
+      line-height:.95;
+      margin:.9rem 0 1rem;
+      max-width:11ch;
+    }
+    .lead{
+      font-size:1.08rem;
+      color:var(--muted);
+      max-width:58ch;
+      line-height:1.8;
+    }
+    .hero-cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.75rem;
+      margin:1.6rem 0 1.9rem;
+    }
+    .hero-grid .panel{
+      background:var(--surface);
+      border:1px solid rgba(20,184,166,.16);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+    }
+    .hero-card{
+      padding:1.1rem;
+      border-radius:var(--radius-xl);
+    }
+    .hero-photo{
+      width:100%;
+      aspect-ratio:4/4.75;
+      object-fit:cover;
+      border-radius:1rem;
+      border:1px solid rgba(242,213,116,.18);
+      box-shadow:0 18px 50px rgba(0,0,0,.25);
+    }
+    .hero-card h2{
+      font-size:1.45rem;
+      margin:1rem 0 .65rem;
+    }
+    .hero-card p{
+      color:var(--muted);
+      margin-bottom:1rem;
+    }
+    .tag-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.55rem;
+    }
+    .tag{
+      padding:.45rem .75rem;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(20,184,166,.18);
+      font-size:.78rem;
+      color:#dafaf6;
+    }
+    .metrics{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:.85rem;
+      margin-top:1.2rem;
+    }
+    .metric{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(20,184,166,.16);
+      border-radius:var(--radius-lg);
+      padding:1rem;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+    }
+    .metric strong{
+      display:block;
+      font-size:1.2rem;
+      margin-bottom:.2rem;
+      color:#fff;
+    }
+    .metric span{
+      color:var(--muted);
+      font-size:.88rem;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:1.5rem;
+      margin-bottom:1.8rem;
+    }
+    .section-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      padding:.35rem .7rem;
+      border-radius:999px;
+      background:rgba(242,213,116,.12);
+      border:1px solid rgba(242,213,116,.22);
+      color:#fff0bf;
+      font-size:.77rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      margin-bottom:.75rem;
+    }
+    .section-title{
+      font-size:clamp(2rem,4vw,3rem);
+      line-height:1;
+    }
+    .section-subtitle{
+      color:var(--muted);
+      max-width:64ch;
+    }
+
+    .services-grid,
+    .experience-grid,
+    .contact-grid{
+      display:grid;
+      gap:1.15rem;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .panel-card{
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(11,31,58,.84), rgba(11,31,58,.62));
+      border:1px solid rgba(20,184,166,.15);
+      border-radius:var(--radius-xl);
+      padding:1.35rem;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(16px);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    .panel-card::before{
+      content:'';
+      position:absolute;
+      inset:-1px;
+      border-radius:inherit;
+      border:1px solid rgba(255,255,255,.12);
+      pointer-events:none;
+    }
+    .panel-card::after{
+      content:'';
+      position:absolute;
+      inset:auto -20% -60% -20%;
+      height:140px;
+      background:radial-gradient(circle, rgba(20,184,166,.18), transparent 65%);
+      pointer-events:none;
+    }
+    .panel-card:hover{
+      transform:translateY(-8px) scale(1.02);
+      border-color:rgba(242,213,116,.28);
+      box-shadow:0 28px 60px rgba(0,0,0,.34);
+    }
+    .panel-icon{
+      width:48px;height:48px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      margin-bottom:.95rem;
+      background:linear-gradient(135deg,rgba(20,184,166,.22),rgba(242,213,116,.22));
+      color:#fff;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .panel-card h3{
+      font-size:1.15rem;
+      margin-bottom:.55rem;
+    }
+    .panel-card p{
+      color:var(--muted);
+      line-height:1.72;
+    }
+
+    .portfolio-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1.1rem;
+    }
+    .portfolio-item{
+      position:relative;
+      overflow:hidden;
+      min-height:360px;
+      border-radius:var(--radius-xl);
+      border:1px solid rgba(20,184,166,.15);
+      box-shadow:var(--shadow);
+      background:#09162b;
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .portfolio-item:hover{
+      transform:translateY(-10px);
+      border-color:rgba(242,213,116,.30);
+      box-shadow:0 32px 70px rgba(0,0,0,.38);
+    }
+    .portfolio-image{
+      width:100%;
+      height:100%;
+      min-height:360px;
+      object-fit:cover;
+      filter:saturate(1.05) contrast(1.04);
+      transition:transform .35s ease;
+    }
+    .portfolio-item:hover .portfolio-image{transform:scale(1.07)}
+    .portfolio-overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding:1rem;
+      background:linear-gradient(180deg, rgba(11,31,58,0) 0%, rgba(11,31,58,.92) 54%, rgba(11,31,58,.98) 100%);
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .portfolio-overlay h3{
+      font-size:1.08rem;
+      margin-bottom:.28rem;
+    }
+    .portfolio-overlay p{
+      font-size:.9rem;
+      color:var(--muted);
+      margin-bottom:.8rem;
+    }
+    .portfolio-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.45rem;
+    }
+    .portfolio-tag{
+      padding:.35rem .6rem;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(20,184,166,.16);
+      font-size:.74rem;
+      color:#f7fbff;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:1.15rem;
+    }
+    .stack-list{
+      list-style:none;
+      display:grid;
+      gap:.8rem;
+    }
+    .stack-list li{
+      padding:.9rem 0;
+      border-bottom:1px solid rgba(20,184,166,.14);
+      color:var(--muted);
+    }
+    .stack-list strong{
+      display:block;
+      color:#fff;
+      margin-bottom:.15rem;
+    }
+
+    .contact-grid{
+      grid-template-columns:1fr .9fr;
+    }
+    .contact-list{
+      list-style:none;
+      display:grid;
+      gap:.85rem;
+      margin-top:1rem;
+    }
+    .contact-list li{
+      display:flex;
+      gap:.7rem;
+      align-items:flex-start;
+      color:var(--muted);
+    }
+    .contact-list i{
+      color:var(--amber);
+      margin-top:.18rem;
+    }
+
+    .back-top{
+      position:fixed;
+      right:1.15rem;
+      bottom:1.15rem;
+      width:52px;
+      height:52px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--teal),var(--amber));
+      color:#031018;
+      box-shadow:0 18px 36px rgba(0,0,0,.3);
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(14px);
+      transition:.22s ease;
+      z-index:60;
+    }
+    .back-top.visible{
+      opacity:1;
+      visibility:visible;
+      transform:translateY(0);
+    }
+
+    footer{
+      padding:1.8rem 0 2.4rem;
+      color:var(--muted);
+      text-align:center;
+    }
+    .footer-line{
+      border-top:1px solid rgba(20,184,166,.16);
+      padding-top:1.1rem;
+    }
+
+    .floaters{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      overflow:hidden;
+    }
+    .floater{
+      position:absolute;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(20,184,166,.9), rgba(20,184,166,0));
+      filter:drop-shadow(0 0 10px rgba(20,184,166,.4));
+      opacity:.8;
+      animation: drift linear infinite;
+    }
+    .floater.amber{
+      background:radial-gradient(circle, rgba(242,213,116,.95), rgba(242,213,116,0));
+      filter:drop-shadow(0 0 10px rgba(242,213,116,.35));
+    }
+    @keyframes drift{
+      from{transform:translate3d(0,0,0) scale(.8)}
+      to{transform:translate3d(var(--dx), var(--dy),0) scale(1.2)}
+    }
+
+    @media (max-width: 1200px){
+      .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .services-grid,.experience-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width: 900px){
+      .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+      .nav{
+        display:none;
+        position:absolute;
+        left:0;
+        right:0;
+        top:78px;
+        padding:1rem;
+        background:rgba(7,16,31,.96);
+        border-bottom:1px solid rgba(20,184,166,.14);
+      }
+      .nav.open{
+        display:flex;
+        flex-direction:column;
+      }
+      .menu-btn{display:grid}
+      .services-grid,.experience-grid,.portfolio-grid{grid-template-columns:1fr}
+      .metrics{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="floaters" id="floaters"></div>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio">
+        <span class="brand-mark"><i class="fa-solid fa-e"></i></span>
+        <span class="brand-text">
+          <strong>Elena Perandrés</strong>
+          <span>Diseño web y marketing digital</span>
+        </span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#estudios">Estudios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="actions">
+        <a class="btn btn-secondary" href="cv-Linkedin.pdf" target="_blank" rel="noopener noreferrer">Descargar CV</a>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-controls="nav" aria-expanded="false" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero reveal" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-sparkles"></i> Azul profundo · turquesa vivo · ámbar energético</span>
+          <h1>Diseño web que comunica, ordena y convierte.</h1>
+          <p class="lead">Soy Elena Perandrés Molino, diseñadora web y especialista en marketing digital. Trabajo con WordPress, Elementor, SEO, frontend y gestión de comunidad para crear experiencias visuales con personalidad y resultados.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#portfolio">Ver portfolio</a>
+            <a class="btn btn-secondary" href="#contacto">Hablemos</a>
+          </div>
+          <div class="metrics">
+            <div class="metric"><strong>WordPress + Elementor</strong><span>Diseño flexible y orientado a conversión.</span></div>
+            <div class="metric"><strong>SEO + Analytics</strong><span>Contenido, rendimiento y visibilidad.</span></div>
+            <div class="metric"><strong>Frontend</strong><span>HTML, CSS, JavaScript y despliegue web.</span></div>
+          </div>
+        </div>
+        <aside class="panel-card hero-card">
+          <img class="hero-photo" src="img/yo.jpg" alt="Elena Perandrés Molino" />
+          <h2>Perfil híbrido y visual</h2>
+          <p>Una mezcla de diseño, estrategia y técnica para marcas, negocios locales y proyectos digitales.</p>
+          <div class="tag-list">
+            <span class="tag">WordPress</span>
+            <span class="tag">Elementor</span>
+            <span class="tag">SEO</span>
+            <span class="tag">Community Manager</span>
+            <span class="tag">Canva</span>
+            <span class="tag">DaVinci Resolve</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="reveal" id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="section-tag">Servicios</span><h2 class="section-title">Lo que hago</h2></div>
+          <p class="section-subtitle">He aplicado el estilo azul profundo, turquesa y ámbar también en las tarjetas para dar más contraste, profundidad y una apariencia más premium.</p>
+        </div>
+        <div class="services-grid">
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-laptop-code"></i></div><h3>Diseño web</h3><p>Webs corporativas, landing pages y portfolios con diseño responsive, jerarquía clara y enfoque comercial.</p></article>
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-chart-line"></i></div><h3>SEO y rendimiento</h3><p>Optimización técnica, contenido, velocidad de carga y estructura para mejorar visibilidad y experiencia.</p></article>
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-bullhorn"></i></div><h3>Marketing digital</h3><p>Community management, estrategia de contenidos, branding visual y crecimiento de audiencias.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="section-tag">Mi trabajo</span><h2 class="section-title">Portfolio seleccionado</h2></div>
+          <p class="section-subtitle">La sección queda en 2 filas y 3 columnas en escritorio, con tarjetas más visuales, overlays elegantes y separación limpia.</p>
+        </div>
+        <div class="portfolio-grid">
+          <article class="portfolio-item reveal" data-delay="0"><img class="portfolio-image" src="img/diseño-web.png" alt="Tarax Digital"><div class="portfolio-overlay"><h3>Tarax Digital</h3><p>Portfolio y hub de recursos digitales.</p><div class="portfolio-tags"><span class="portfolio-tag">Marca personal</span><span class="portfolio-tag">SEO</span><span class="portfolio-tag">Frontend</span></div></div></article>
+          <article class="portfolio-item reveal" data-delay="80"><img class="portfolio-image" src="img/agencia-publicidad.png" alt="ImpulsaT Publicidad"><div class="portfolio-overlay"><h3>ImpulsaT Publicidad</h3><p>Servicios digitales y emprendimiento.</p><div class="portfolio-tags"><span class="portfolio-tag">WordPress</span><span class="portfolio-tag">Conversión</span><span class="portfolio-tag">Branding</span></div></div></article>
+          <article class="portfolio-item reveal" data-delay="160"><img class="portfolio-image" src="img/creaydecora.png" alt="Web negocio local"><div class="portfolio-overlay"><h3>Web para negocio local</h3><p>Presencia profesional y captación.</p><div class="portfolio-tags"><span class="portfolio-tag">Responsive</span><span class="portfolio-tag">Ventas</span><span class="portfolio-tag">UI</span></div></div></article>
+          <article class="portfolio-item reveal" data-delay="240"><img class="portfolio-image" src="img/cafetería.png" alt="Diseño para cafetería"><div class="portfolio-overlay"><h3>Diseño para cafetería</h3><p>Identidad visual con aroma a marca.</p><div class="portfolio-tags"><span class="portfolio-tag">Branding</span><span class="portfolio-tag">Diseño</span><span class="portfolio-tag">Web</span></div></div></article>
+          <article class="portfolio-item reveal" data-delay="320"><img class="portfolio-image" src="img/grid.png" alt="Creatividad visual con IA"><div class="portfolio-overlay"><h3>Creatividad visual con IA</h3><p>Recursos visuales, prompts y piezas creativas.</p><div class="portfolio-tags"><span class="portfolio-tag">IA</span><span class="portfolio-tag">Canva</span><span class="portfolio-tag">Contenido</span></div></div></article>
+          <article class="portfolio-item reveal" data-delay="400"><img class="portfolio-image" src="img/2.png" alt="Selección creativa"><div class="portfolio-overlay"><h3>Selección creativa</h3><p>Piezas visuales para comunicar mejor.</p><div class="portfolio-tags"><span class="portfolio-tag">Visual</span><span class="portfolio-tag">Social</span><span class="portfolio-tag">Contenido</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" id="experiencia">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="section-tag">Experiencia</span><h2 class="section-title">Trayectoria</h2></div>
+          <p class="section-subtitle">Las tarjetas también reciben profundidad, borde suave, sombra y elevación al pasar el cursor.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-code"></i></div><h3>Diseñadora web freelance</h3><p>Creación de webs con WordPress, Elementor y frontend para proyectos personales y clientes.</p></article>
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-users"></i></div><h3>Community manager</h3><p>Gestión de comunidades, contenido y redes sociales con foco en métricas y engagement.</p></article>
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-video"></i></div><h3>Contenido audiovisual</h3><p>Producción y edición de vídeo, branding visual y piezas para redes y YouTube.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" id="sobre-mi">
+      <div class="container about-grid">
+        <article class="panel-card reveal">
+          <span class="section-tag">Sobre mí</span>
+          <h2 class="section-title" style="margin-bottom:1rem">Una marca visual con base técnica</h2>
+          <p style="color:var(--muted);line-height:1.8">Soy una profesional digital orientada a resultados, con un perfil híbrido entre diseño web, marketing digital y creación de contenido. Me gusta construir proyectos que se vean bien, se entiendan rápido y ayuden a convertir visitas en contactos o clientes.</p>
+          <p style="color:var(--muted);line-height:1.8;margin-top:1rem">Combino WordPress, Elementor, SEO, HTML, CSS y JavaScript con estrategia de contenidos y community management para crear webs funcionales, claras y visualmente cuidadas.</p>
+          <div class="tag-list" style="margin-top:1rem">
+            <span class="tag">Granada</span>
+            <span class="tag">Remoto</span>
+            <span class="tag">Freelance</span>
+            <span class="tag">EdTech</span>
+          </div>
+        </article>
+        <article class="panel-card reveal">
+          <span class="section-tag">Enfoque</span>
+          <ul class="stack-list">
+            <li><strong>Diseño web</strong>WordPress, Elementor, responsive y conversiones.</li>
+            <li><strong>Marketing digital</strong>SEO, analítica, community management y contenido.</li>
+            <li><strong>Base técnica</strong>HTML, CSS, JavaScript y despliegue en Netlify.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="reveal" id="estudios">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="section-tag">Formación</span><h2 class="section-title">Estudios</h2></div>
+          <p class="section-subtitle">He incorporado aquí tus credenciales formativas para reforzar la parte técnica y de marketing digital del portfolio.</p>
+        </div>
+        <div class="services-grid">
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-graduation-cap"></i></div><h3>Desarrollo de Aplicaciones con Tecnologías Web</h3><p>Certificado de Profesionalidad (Nivel 3), Academia Atlántida, 580 horas presenciales, 2024.</p></article>
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-bullseye"></i></div><h3>Community Manager y SEO</h3><p>Especialización en Community Manager y Posicionamiento Web SEO, Cámara de Comercio de Granada, 260 horas, 2022.</p></article>
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-laptop"></i></div><h3>Competencias Digitales Avanzadas</h3><p>Academia Galilea, 120 horas, 2023. Formación en competencias, herramientas y productividad digital.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" id="contacto">
+      <div class="container contact-grid">
+        <article class="panel-card reveal">
+          <span class="section-tag">Contacto</span>
+          <h2 class="section-title" style="margin-bottom:1rem">¿Hablamos?</h2>
+          <p style="color:var(--muted);line-height:1.8">Si necesitas una web más profesional, mejorar tu presencia digital o crear contenido con más impacto, puedo ayudarte.</p>
+          <ul class="contact-list">
+            <li><i class="fa-solid fa-envelope"></i><span>helenaperand@gmail.com</span></li>
+            <li><i class="fa-solid fa-phone"></i><span>+34 680 613 291</span></li>
+            <li><i class="fa-solid fa-location-dot"></i><span>Granada, España</span></li>
+          </ul>
+        </article>
+        <article class="panel-card reveal">
+          <span class="section-tag">Redes</span>
+          <h3 style="font-size:1.45rem;margin-bottom:.7rem">Presencia digital</h3>
+          <p style="color:var(--muted);line-height:1.8">Portfolio, YouTube, Instagram, LinkedIn y GitHub reunidos para mostrar tu trabajo de forma clara.</p>
+          <div class="tag-list" style="margin-top:1rem">
+            <a class="tag" href="https://taraxdigital.netlify.app/" target="_blank" rel="noopener noreferrer">Tarax Digital</a>
+            <a class="tag" href="https://impulsatpublicidad.netlify.app/" target="_blank" rel="noopener noreferrer">ImpulsaT Publicidad</a>
+            <a class="tag" href="https://github.com/taraxdigital" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="tag" href="https://www.instagram.com/taraxdigital/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a class="tag" href="https://www.linkedin.com/in/elena-perandres-molino/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="tag" href="https://www.youtube.com/@spinning-music_bySatarax" target="_blank" rel="noopener noreferrer">YouTube</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <a class="back-top" href="#inicio" id="backTop" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></a>
+  <footer><div class="container footer-line">© Elena Perandrés Molino · Portfolio profesional actualizado</div></footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const menuBtn = document.getElementById('menuBtn');
+    const backTop = document.getElementById('backTop');
+    const reveal = document.querySelectorAll('.reveal');
+    const floaters = document.getElementById('floaters');
+
+    for (let i = 0; i < 18; i++) {
+      const s = document.createElement('span');
+      s.className = 'floater ' + (i % 3 === 0 ? 'amber' : '');
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.top = Math.random() * 100 + 'vh';
+      s.style.setProperty('--dx', (Math.random() * 80 - 40) + 'px');
+      s.style.setProperty('--dy', (Math.random() * 120 - 60) + 'px');
+      s.style.animationDuration = (10 + Math.random() * 10) + 's';
+      s.style.animationDelay = (-Math.random() * 10) + 's';
+      s.style.width = s.style.height = (4 + Math.random() * 7) + 'px';
+      floaters.appendChild(s);
+    }
+
+    menuBtn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const d = Number(entry.target.dataset.delay || 0);
+          setTimeout(() => entry.target.classList.add('is-visible'), d);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    reveal.forEach(el => io.observe(el));
+
+    const toggleBack = () => backTop.classList.toggle('visible', window.scrollY > 480);
+    toggleBack();
+    window.addEventListener('scroll', toggleBack, { passive: true });
+  </script>
+</body>
+</html>
