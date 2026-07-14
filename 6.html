@@ -90,7 +90,7 @@
       z-index:50;
       backdrop-filter:blur(18px);
       background:rgba(7,16,31,.62);
-      border-bottom:1px solid rgba(20,184,166,.15);
+      border-bottom:1px solid rgba(242,213,116,.24);
     }
     .header-inner{
       min-height:78px;
@@ -112,9 +112,11 @@
     .nav{display:flex;gap:1.15rem;flex-wrap:wrap}
     .nav a{
       font-size:.92rem;
-      color:var(--muted);
+      color:var(--amber);
       position:relative;
+      font-weight:700;
     }
+    .nav a:hover{color:#fff6d8}
     .nav a::after{
       content:'';
       position:absolute;
@@ -123,7 +125,7 @@
       width:100%;
       height:2px;
       border-radius:999px;
-      background:linear-gradient(90deg,var(--teal),var(--amber));
+      background:linear-gradient(90deg,var(--amber),#fff0bf);
       transform:scaleX(0);
       transform-origin:left;
       transition:transform .22s ease;
@@ -154,7 +156,7 @@
     .btn-secondary{
       background:rgba(255,255,255,.05);
       color:var(--text);
-      border:1px solid rgba(20,184,166,.18);
+      border:1px solid rgba(242,213,116,.24);
     }
     .btn-secondary:hover{
       background:rgba(255,255,255,.09);
@@ -164,7 +166,7 @@
       width:44px;height:44px;border-radius:50%;
       background:rgba(255,255,255,.05);
       color:var(--text);
-      border:1px solid rgba(20,184,166,.18);
+      border:1px solid rgba(242,213,116,.24);
       display:grid;place-items:center;
     }
     .menu-btn{display:none}
@@ -440,6 +442,102 @@
       color:#f7fbff;
     }
 
+    .gallery-filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.7rem;
+      margin-bottom:1.2rem;
+    }
+    .filter-btn{
+      border:1px solid rgba(242,213,116,.22);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      padding:.75rem 1rem;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+      transition:.2s ease;
+    }
+    .filter-btn:hover,.filter-btn.active{
+      background:linear-gradient(135deg,var(--amber),#fff0bf);
+      color:#081120;
+      transform:translateY(-2px);
+    }
+    .ia-gallery{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:1rem;
+    }
+    .gallery-item{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius-xl);
+      min-height:280px;
+      cursor:pointer;
+      border:1px solid rgba(20,184,166,.15);
+      box-shadow:var(--shadow);
+    }
+    .gallery-item img{
+      width:100%;
+      height:100%;
+      min-height:280px;
+      object-fit:cover;
+      transition:transform .35s ease;
+    }
+    .gallery-item:hover img{transform:scale(1.08)}
+    .gallery-caption{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      padding:1rem;
+      background:linear-gradient(180deg, rgba(11,31,58,0), rgba(11,31,58,.95));
+    }
+    .gallery-caption h3{
+      font-size:1rem;
+      margin-bottom:.2rem;
+    }
+    .gallery-caption p{
+      color:var(--muted);
+      font-size:.88rem;
+    }
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(3,8,15,.88);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      z-index:100;
+      padding:2rem;
+    }
+    .modal.open{display:flex}
+    .modal img{
+      max-width:min(900px, 92vw);
+      max-height:72vh;
+      border-radius:1rem;
+      box-shadow:0 24px 70px rgba(0,0,0,.5);
+    }
+    .modal-close{
+      position:absolute;
+      top:1rem;
+      right:1rem;
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      border:0;
+      font-size:2rem;
+      cursor:pointer;
+      background:var(--amber);
+      color:#081120;
+      font-weight:700;
+    }
+    .modal h3{
+      margin-top:1rem;
+      color:#fff;
+    }
+
     .about-grid{
       display:grid;
       grid-template-columns:1.05fr .95fr;
@@ -549,7 +647,7 @@
 
     @media (max-width: 1200px){
       .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .services-grid,.experience-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .services-grid,.experience-grid,.ia-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
     @media (max-width: 900px){
       .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
@@ -561,14 +659,14 @@
         top:78px;
         padding:1rem;
         background:rgba(7,16,31,.96);
-        border-bottom:1px solid rgba(20,184,166,.14);
+        border-bottom:1px solid rgba(242,213,116,.20);
       }
       .nav.open{
         display:flex;
         flex-direction:column;
       }
       .menu-btn{display:grid}
-      .services-grid,.experience-grid,.portfolio-grid{grid-template-columns:1fr}
+      .services-grid,.experience-grid,.portfolio-grid,.ia-gallery{grid-template-columns:1fr}
       .metrics{grid-template-columns:1fr}
     }
   </style>
@@ -590,6 +688,7 @@
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
         <a href="#portfolio">Portfolio</a>
+        <a href="#galeria-ia">IA Creativa</a>
         <a href="#experiencia">Experiencia</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#estudios">Estudios</a>
@@ -640,12 +739,11 @@
       <div class="container">
         <div class="section-head">
           <div><span class="section-tag">Servicios</span><h2 class="section-title">Lo que hago</h2></div>
-
         </div>
         <div class="services-grid">
           <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-laptop-code"></i></div><h3>Diseño web</h3><p>Webs corporativas, landing pages y portfolios con diseño responsive, jerarquía clara y enfoque comercial.</p></article>
           <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-chart-line"></i></div><h3>SEO y rendimiento</h3><p>Optimización técnica, contenido, velocidad de carga y estructura para mejorar visibilidad y experiencia.</p></article>
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-bullhorn"></i></div><h3>Marketing digital</h3><p>Ayudo a empresas a ganar visibilidad en Internet, atraer nuevos clientes y aumentar sus ventas</p></article>
+          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-bullhorn"></i></div><h3>Marketing digital</h3><p>Ayudo a empresas a ganar visibilidad en Internet, atraer nuevos clientes y aumentar sus ventas.</p></article>
         </div>
       </div>
     </section>
@@ -654,24 +752,50 @@
       <div class="container">
         <div class="section-head">
           <div><span class="section-tag">Mi trabajo</span><h2 class="section-title">Portfolio seleccionado</h2></div>
-
         </div>
         <div class="portfolio-grid">
           <article class="portfolio-item reveal" data-delay="0"><img class="portfolio-image" src="img/Diseño sin título.png" alt="Tarax Digital"><div class="portfolio-overlay"><h3>Tarax Digital</h3><p>Portfolio y hub de recursos digitales.</p><div class="portfolio-tags"><span class="portfolio-tag">Marca personal</span><span class="portfolio-tag">SEO</span><span class="portfolio-tag">Frontend</span></div></div></article>
           <article class="portfolio-item reveal" data-delay="80"><img class="portfolio-image" src="img/agencia-publicidad.png" alt="ImpulsaT Publicidad"><div class="portfolio-overlay"><h3>ImpulsaT Publicidad</h3><p>Servicios digitales y emprendimiento.</p><div class="portfolio-tags"><span class="portfolio-tag">WordPress</span><span class="portfolio-tag">Conversión</span><span class="portfolio-tag">Branding</span></div></div></article>
           <article class="portfolio-item reveal" data-delay="160"><img class="portfolio-image" src="img/creaydecora.png" alt="Web negocio local"><div class="portfolio-overlay"><h3>Web para negocio local</h3><p>Presencia profesional y captación.</p><div class="portfolio-tags"><span class="portfolio-tag">Responsive</span><span class="portfolio-tag">Ventas</span><span class="portfolio-tag">UI</span></div></div></article>
           <article class="portfolio-item reveal" data-delay="240"><img class="portfolio-image" src="img/cafetería.png" alt="Diseño para cafetería"><div class="portfolio-overlay"><h3>Diseño para cafetería</h3><p>Identidad visual con aroma a marca.</p><div class="portfolio-tags"><span class="portfolio-tag">Branding</span><span class="portfolio-tag">Diseño</span><span class="portfolio-tag">Web</span></div></div></article>
-          <article class="portfolio-item reveal" data-delay="320"><img class="portfolio-image" src="img/Brown and Beige Aesthetic Mood Collage  Poster (1).png" alt="Creatividad visual con IA"><div class="portfolio-overlay"><h3>Creatividad visual con IA</h3><p>Recursos visuales, prompts y piezas creativas.</p><div class="portfolio-tags"><span class="portfolio-tag">IA</span><span class="portfolio-tag">Canva</span><span class="portfolio-tag">Contenido</span></div></div></article>
+          <article class="portfolio-item reveal" data-delay="320"><img class="portfolio-image" src="img/grid.png" alt="Creatividad visual con IA"><div class="portfolio-overlay"><h3>Creatividad visual con IA</h3><p>Recursos visuales, prompts y piezas creativas.</p><div class="portfolio-tags"><span class="portfolio-tag">IA</span><span class="portfolio-tag">Canva</span><span class="portfolio-tag">Contenido</span></div></div></article>
           <article class="portfolio-item reveal" data-delay="400"><img class="portfolio-image" src="img/2.png" alt="Selección creativa"><div class="portfolio-overlay"><h3>Selección creativa</h3><p>Piezas visuales para comunicar mejor.</p><div class="portfolio-tags"><span class="portfolio-tag">Visual</span><span class="portfolio-tag">Social</span><span class="portfolio-tag">Contenido</span></div></div></article>
         </div>
       </div>
     </section>
 
+    <section class="reveal" id="galeria-ia">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="section-tag">IA Creativa</span><h2 class="section-title">Galería interactiva</h2></div>
+          <p class="section-subtitle">Una selección de imágenes creadas con IA para mostrar estilo, exploración visual y creatividad.</p>
+        </div>
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">Todo</button>
+          <button class="filter-btn" data-filter="branding">Branding</button>
+          <button class="filter-btn" data-filter="concepto">Concepto</button>
+          <button class="filter-btn" data-filter="social">Social</button>
+          <button class="filter-btn" data-filter="arte">Arte</button>
+        </div>
+        <div class="ia-gallery" id="iaGallery">
+          <article class="gallery-item" data-category="branding"><img src="img/ia-1.jpg" alt="Creación IA branding 1"><div class="gallery-caption"><h3>Branding futurista</h3><p>Exploración visual con IA.</p></div></article>
+          <article class="gallery-item" data-category="concepto"><img src="img/ia-2.jpg" alt="Creación IA concepto 2"><div class="gallery-caption"><h3>Concepto digital</h3><p>Estética experimental y moderna.</p></div></article>
+          <article class="gallery-item" data-category="social"><img src="img/ia-3.jpg" alt="Creación IA social 3"><div class="gallery-caption"><h3>Pieza social</h3><p>Diseño pensado para redes.</p></div></article>
+          <article class="gallery-item" data-category="arte"><img src="img/ia-4.jpg" alt="Creación IA arte 4"><div class="gallery-caption"><h3>Arte visual</h3><p>Composición creativa con IA.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <div class="modal" id="galleryModal" aria-hidden="true">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+      <img id="modalImg" alt="Vista ampliada" />
+      <h3 id="modalTitle"></h3>
+    </div>
+
     <section class="reveal" id="experiencia">
       <div class="container">
         <div class="section-head">
           <div><span class="section-tag">Experiencia</span><h2 class="section-title">Trayectoria</h2></div>
-        
         </div>
         <div class="experience-grid">
           <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-code"></i></div><h3>Diseñadora web freelance</h3><p>Creación de webs con WordPress, Elementor y frontend para proyectos personales y clientes.</p></article>
@@ -687,9 +811,8 @@
           <span class="section-tag">Sobre mí</span>
           <h2 class="section-title" style="margin-bottom:1rem">Quién soy</h2>
           <p style="color:var(--muted);line-height:1.8">Soy una profesional digital con perfil híbrido entre diseño web, marketing digital y creación de contenido. Mi fortaleza está en unir una parte visual cuidada con una base técnica real, para construir proyectos más claros, útiles y preparados para crecer online.</p>
-          <p style="color:var(--muted);line-height:1.8;margin-top:1rem">Trabajo especialmente bien con WordPress y Elementor, pero también puedo maquetar y personalizar con HTML, CSS y JavaScript. Además, aplico SEO, estructura de contenidos y optimización de rendimiento para que una web no solo sea bonita, sino efectiva.</p><br>
-          Dirijo dos canales de youtube con más de 13k subscriptores.
-          <p style="color:var(--muted);line-height:1.8;margin-top:1rem">Mi experiencia en YouTube, redes sociales y formación, me aporta una visión más completa de marca, audiencia, narrativa y captación de atención. <br>Fecha de nacimiento: 17 de mayo de 1972.</p>
+          <p style="color:var(--muted);line-height:1.8;margin-top:1rem">Trabajo especialmente bien con WordPress y Elementor, pero también puedo maquetar y personalizar con HTML, CSS y JavaScript. Además, aplico SEO, estructura de contenidos y optimización de rendimiento para que una web no solo sea bonita, sino efectiva.</p>
+          <p style="color:var(--muted);line-height:1.8;margin-top:1rem">Dirijo dos canales de YouTube con más de 13k suscriptores. Mi experiencia en YouTube, redes sociales y formación me aporta una visión más completa de marca, audiencia, narrativa y captación de atención. Fecha de nacimiento: 17 de mayo de 1972.</p>
           <div class="chip-row">
             <span class="tag">Granada, España</span>
             <span class="tag">Disponible para remoto o presencial</span>
@@ -700,8 +823,8 @@
           <ul class="stack-list">
             <li><strong>Especialización principal</strong>Diseño web, WordPress con Elementor, SEO y marketing digital.</li>
             <li><strong>Perfil complementario</strong>Marketing digital, analítica, branding visual y edición de vídeo.</li>
-           <li><strong>Base técnica</strong>HTML5, CSS3, JavaScript, responsive design, CSS Grid, Flexbox y accesibilidad básica.</li>
-           <li><strong>Herramientas y despliegue</strong>WordPress, Elementor, SEO on-page, Git, GitHub y Netlify.</li>
+            <li><strong>Base técnica</strong>HTML5, CSS3, JavaScript, responsive design, CSS Grid, Flexbox y accesibilidad básica.</li>
+            <li><strong>Herramientas y despliegue</strong>WordPress, Elementor, SEO on-page, Git, GitHub y Netlify.</li>
             <li><strong>Objetivo</strong>Ayudar a marcas y proyectos a verse mejor, comunicar mejor y convertir mejor.</li>
           </ul>
         </aside>
@@ -712,7 +835,6 @@
       <div class="container">
         <div class="section-head">
           <div><span class="section-tag">Formación</span><h2 class="section-title">Estudios</h2></div>
-
         </div>
         <div class="services-grid">
           <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-graduation-cap"></i></div><h3>Desarrollo de Aplicaciones con Tecnologías Web</h3><p>Certificado de Profesionalidad (Nivel 3), Academia Atlántida, 580 horas presenciales, 2024.</p></article>
@@ -753,7 +875,7 @@
   </main>
 
   <a class="back-top" href="#inicio" id="backTop" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></a>
-  <footer><div class="container footer-line">© Elena Perandrés Molino · Portfolio profesional </div></footer>
+  <footer><div class="container footer-line">© Elena Perandrés Molino · Portfolio profesional</div></footer>
 
   <script>
     const nav = document.getElementById('nav');
@@ -761,6 +883,12 @@
     const backTop = document.getElementById('backTop');
     const reveal = document.querySelectorAll('.reveal');
     const floaters = document.getElementById('floaters');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const modal = document.getElementById('galleryModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalClose = document.getElementById('modalClose');
 
     for (let i = 0; i < 18; i++) {
       const s = document.createElement('span');
@@ -779,6 +907,7 @@
       const open = nav.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
+
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
     const io = new IntersectionObserver((entries) => {
@@ -795,6 +924,49 @@
     const toggleBack = () => backTop.classList.toggle('visible', window.scrollY > 480);
     toggleBack();
     window.addEventListener('scroll', toggleBack, { passive: true });
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        galleryItems.forEach(item => {
+          const show = filter === 'all' || item.dataset.category === filter;
+          item.style.display = show ? 'block' : 'none';
+        });
+      });
+    });
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        const title = item.querySelector('h3')?.textContent || '';
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        modalTitle.textContent = title;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    });
   </script>
 </body>
 </html>
