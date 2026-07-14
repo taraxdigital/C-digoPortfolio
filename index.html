@@ -27,8 +27,10 @@
       --font-body: 'Satoshi', sans-serif;
       --font-display: 'Clash Display', sans-serif;
     }
+
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
+
     body{
       font-family:var(--font-body);
       color:var(--text);
@@ -39,10 +41,10 @@
       min-height:100vh;
       overflow-x:hidden;
     }
+
     body::before, body::after{
       content:'';
       position:fixed;
-      inset:auto;
       pointer-events:none;
       z-index:0;
       opacity:.55;
@@ -53,6 +55,7 @@
       background: radial-gradient(circle, rgba(20,184,166,.22), transparent 62%);
       animation: floaty 12s ease-in-out infinite;
     }
+
     body::before{ left:-40px; top:18vh; }
     body::after{
       right:-55px;
@@ -60,18 +63,22 @@
       background: radial-gradient(circle, rgba(242,213,116,.20), transparent 62%);
       animation-duration: 15s;
     }
+
     @keyframes floaty{
       0%,100%{transform:translateY(0) translateX(0)}
       50%{transform:translateY(-18px) translateX(12px)}
     }
+
     .container{
       width:min(calc(100% - 2rem), var(--max));
       margin:0 auto;
       position:relative;
       z-index:1;
     }
+
     a{text-decoration:none;color:inherit}
     img{display:block;max-width:100%;height:auto}
+
     .skip{
       position:absolute;
       left:-999px;
@@ -82,16 +89,26 @@
       border-radius:999px;
       z-index:20;
     }
+
     .skip:focus{left:1rem}
 
     .header{
       position:sticky;
       top:0;
       z-index:50;
-      backdrop-filter:blur(18px);
-      background:rgba(7,16,31,.62);
-      border-bottom:1px solid rgba(20,184,166,.15);
+      background:#f2d574;
+      border-bottom:1px solid rgba(0,0,0,.12);
+      box-shadow:0 10px 24px rgba(0,0,0,.10);
+      transition: background-color .25s ease, backdrop-filter .25s ease, box-shadow .25s ease;
     }
+
+.header.scrolled{
+  background:rgba(242,213,116,.80);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 12px 28px rgba(0,0,0,.16);
+}
+
     .header-inner{
       min-height:78px;
       display:flex;
@@ -99,22 +116,61 @@
       justify-content:space-between;
       gap:1rem;
     }
-    .brand{display:flex;align-items:center;gap:.85rem;font-weight:700}
-    .brand-mark{
-      width:42px;height:42px;border-radius:50%;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--teal),var(--amber));
-      color:#04111d;
-      box-shadow:0 8px 20px rgba(20,184,166,.25);
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.85rem;
+      font-weight:700;
     }
-    .brand-text strong{display:block;font-size:.95rem;letter-spacing:.02em}
-    .brand-text span{display:block;font-size:.78rem;color:var(--muted)}
-    .nav{display:flex;gap:1.15rem;flex-wrap:wrap}
+
+    
+
+    .brand-text strong,
+    .brand-text span{
+      color:#0b0b0b;
+    }
+
+    .brand-text strong{
+      display:block;
+      font-size:.95rem;
+      letter-spacing:.02em;
+    }
+
+    .brand-text span{
+      display:block;
+      font-size:.78rem;
+    }
+
+    .nav{
+      display:flex;
+      gap:1.15rem;
+      flex-wrap:wrap;
+      background:transparent;
+      padding:0;
+      border-radius:0;
+      box-shadow:none;
+    }
+
     .nav a{
       font-size:.92rem;
-      color:var(--muted);
+      color:#0b0b0b;
       position:relative;
+      font-weight:800;
+      transition: color .22s ease, transform .22s ease, opacity .22s ease;
+      opacity:.92;
     }
+
+    .nav a:hover{
+      color:#000;
+      transform:translateY(-1px);
+      opacity:1;
+    }
+
+    .nav a.active{
+      color:#000;
+    }
+
     .nav a::after{
       content:'';
       position:absolute;
@@ -123,14 +179,29 @@
       width:100%;
       height:2px;
       border-radius:999px;
-      background:linear-gradient(90deg,var(--teal),var(--amber));
+      background:#000;
       transform:scaleX(0);
       transform-origin:left;
       transition:transform .22s ease;
     }
-    .nav a:hover::after{transform:scaleX(1)}
-    .actions{display:flex;align-items:center;gap:.75rem}
-    .btn,.icon-btn{border:0;cursor:pointer}
+
+    .nav a:hover::after,
+    .nav a.active::after{
+      transform:scaleX(1);
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      position:relative;
+    }
+
+    .btn,.icon-btn{
+      border:0;
+      cursor:pointer;
+    }
+
     .btn{
       display:inline-flex;
       align-items:center;
@@ -143,76 +214,83 @@
       transition:.22s ease;
       box-shadow:0 10px 24px rgba(0,0,0,.18);
     }
+
     .btn-primary{
       background:linear-gradient(135deg,var(--teal),#0ea5a3);
       color:#031018;
     }
+
     .btn-primary:hover{
       transform:translateY(-2px) scale(1.01);
       box-shadow:0 18px 34px rgba(20,184,166,.22);
     }
-    .btn-secondary{
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      border:1px solid rgba(20,184,166,.18);
-    }
-    .btn-secondary:hover{
-      background:rgba(255,255,255,.09);
-      transform:translateY(-2px);
-    }
+
+   .btn-secondary{
+  background:#ffffff;
+  color:#0b0b0b;
+  border:1px solid rgba(0,0,0,.14);
+}
+
+.btn-secondary:hover{
+  background:#f7f7f7;
+  color:#000;
+  transform:translateY(-2px);
+  box-shadow:0 14px 26px rgba(0,0,0,.14);
+}
+.btn-secondary:focus-visible{
+  outline:2px solid #0b0b0b;
+  outline-offset:3px;
+}
+
     .icon-btn{
-      width:44px;height:44px;border-radius:50%;
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      border:1px solid rgba(20,184,166,.18);
-      display:grid;place-items:center;
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      background:rgba(11,11,11,.06);
+      color:#0b0b0b;
+      border:1px solid rgba(11,11,11,.14);
+      display:grid;
+      place-items:center;
     }
+
     .menu-btn{display:none}
-    .brand-logo{
-  background: linear-gradient(135deg, rgba(20,184,166,.22), rgba(242,213,116,.22));
-  border: 1px solid rgba(242,213,116,.35);
-  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+.brand-mark{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#0b1f3a;
+  color:#0b0b0b;
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+  border:1px solid rgba(11,31,58,.15);
+  overflow:hidden;
 }
 
-.logo-e{
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--amber);
-  text-shadow: 0 0 12px rgba(242,213,116,.25);
-  position: relative;
+.brand-logo{
+  background:#0b1f3a;
+  border:1px solid rgba(242,213,116,.34);
+  box-shadow:0 10px 24px rgba(0,0,0,.22);
 }
 
-.logo-e::before,
-.logo-e::after{
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 16px;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--teal);
-}
-
-.logo-e::before{
-  top: 3px;
-}
-
-.logo-e::after{
-  bottom: 3px;
+.logo-svg{
+  width:34px;
+  height:34px;
+  display:block;
+  filter:drop-shadow(0 0 8px rgba(242,213,116,.18));
 }
 
     section{
       padding:clamp(4rem,7vw,6.5rem) 0;
       position:relative;
     }
+
     .reveal{
       opacity:0;
       transform:translateY(34px);
       transition:opacity .7s ease, transform .7s ease;
     }
+
     .reveal.is-visible{
       opacity:1;
       transform:translateY(0);
@@ -224,12 +302,14 @@
       display:flex;
       align-items:center;
     }
+
     .hero-grid{
       display:grid;
       grid-template-columns:1.15fr .85fr;
       gap:2rem;
       align-items:center;
     }
+
     .eyebrow{
       display:inline-flex;
       align-items:center;
@@ -244,35 +324,42 @@
       letter-spacing:.06em;
       text-transform:uppercase;
     }
+
     h1,h2,h3{font-family:var(--font-display)}
+
     h1{
       font-size:clamp(3rem,7vw,5.6rem);
       line-height:.95;
       margin:.9rem 0 1rem;
       max-width:11ch;
     }
+
     .lead{
       font-size:1.08rem;
       color:var(--muted);
       max-width:58ch;
       line-height:1.8;
     }
+
     .hero-cta{
       display:flex;
       flex-wrap:wrap;
       gap:.75rem;
       margin:1.6rem 0 1.9rem;
     }
+
     .hero-grid .panel{
       background:var(--surface);
       border:1px solid rgba(20,184,166,.16);
       box-shadow:var(--shadow);
       backdrop-filter:blur(14px);
     }
+
     .hero-card{
       padding:1.1rem;
       border-radius:var(--radius-xl);
     }
+
     .hero-photo{
       width:100%;
       aspect-ratio:4/4.75;
@@ -281,19 +368,23 @@
       border:1px solid rgba(242,213,116,.18);
       box-shadow:0 18px 50px rgba(0,0,0,.25);
     }
+
     .hero-card h2{
       font-size:1.45rem;
       margin:1rem 0 .65rem;
     }
+
     .hero-card p{
       color:var(--muted);
       margin-bottom:1rem;
     }
+
     .tag-list{
       display:flex;
       flex-wrap:wrap;
       gap:.55rem;
     }
+
     .tag{
       padding:.45rem .75rem;
       border-radius:999px;
@@ -302,12 +393,14 @@
       font-size:.78rem;
       color:#dafaf6;
     }
+
     .metrics{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:.85rem;
       margin-top:1.2rem;
     }
+
     .metric{
       background:rgba(255,255,255,.04);
       border:1px solid rgba(20,184,166,.16);
@@ -316,12 +409,14 @@
       box-shadow:var(--shadow);
       backdrop-filter:blur(12px);
     }
+
     .metric strong{
       display:block;
       font-size:1.2rem;
       margin-bottom:.2rem;
       color:#fff;
     }
+
     .metric span{
       color:var(--muted);
       font-size:.88rem;
@@ -334,6 +429,7 @@
       gap:1.5rem;
       margin-bottom:1.8rem;
     }
+
     .section-tag{
       display:inline-flex;
       align-items:center;
@@ -349,10 +445,12 @@
       letter-spacing:.05em;
       margin-bottom:.75rem;
     }
+
     .section-title{
       font-size:clamp(2rem,4vw,3rem);
       line-height:1;
     }
+
     .section-subtitle{
       color:var(--muted);
       max-width:64ch;
@@ -365,6 +463,7 @@
       gap:1.15rem;
       grid-template-columns:repeat(3,minmax(0,1fr));
     }
+
     .panel-card{
       position:relative;
       overflow:hidden;
@@ -376,6 +475,7 @@
       backdrop-filter:blur(16px);
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
+
     .panel-card::before{
       content:'';
       position:absolute;
@@ -384,6 +484,7 @@
       border:1px solid rgba(255,255,255,.12);
       pointer-events:none;
     }
+
     .panel-card::after{
       content:'';
       position:absolute;
@@ -392,13 +493,16 @@
       background:radial-gradient(circle, rgba(20,184,166,.18), transparent 65%);
       pointer-events:none;
     }
+
     .panel-card:hover{
       transform:translateY(-8px) scale(1.02);
       border-color:rgba(242,213,116,.28);
       box-shadow:0 28px 60px rgba(0,0,0,.34);
     }
+
     .panel-icon{
-      width:48px;height:48px;
+      width:48px;
+      height:48px;
       border-radius:50%;
       display:grid;
       place-items:center;
@@ -407,10 +511,12 @@
       color:#fff;
       border:1px solid rgba(255,255,255,.12);
     }
+
     .panel-card h3{
       font-size:1.15rem;
       margin-bottom:.55rem;
     }
+
     .panel-card p{
       color:var(--muted);
       line-height:1.72;
@@ -421,6 +527,7 @@
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:1.1rem;
     }
+
     .portfolio-item{
       position:relative;
       overflow:hidden;
@@ -431,11 +538,13 @@
       background:#09162b;
       transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
+
     .portfolio-item:hover{
       transform:translateY(-10px);
       border-color:rgba(242,213,116,.30);
       box-shadow:0 32px 70px rgba(0,0,0,.38);
     }
+
     .portfolio-image{
       width:100%;
       height:100%;
@@ -444,7 +553,9 @@
       filter:saturate(1.05) contrast(1.04);
       transition:transform .35s ease;
     }
+
     .portfolio-item:hover .portfolio-image{transform:scale(1.07)}
+
     .portfolio-overlay{
       position:absolute;
       inset:auto 0 0 0;
@@ -452,20 +563,24 @@
       background:linear-gradient(180deg, rgba(11,31,58,0) 0%, rgba(11,31,58,.92) 54%, rgba(11,31,58,.98) 100%);
       border-top:1px solid rgba(255,255,255,.08);
     }
+
     .portfolio-overlay h3{
       font-size:1.08rem;
       margin-bottom:.28rem;
     }
+
     .portfolio-overlay p{
       font-size:.9rem;
       color:var(--muted);
       margin-bottom:.8rem;
     }
+
     .portfolio-tags{
       display:flex;
       flex-wrap:wrap;
       gap:.45rem;
     }
+
     .portfolio-tag{
       padding:.35rem .6rem;
       border-radius:999px;
@@ -480,21 +595,25 @@
       grid-template-columns:1.05fr .95fr;
       gap:1.15rem;
     }
+
     .stack-list{
       list-style:none;
       display:grid;
       gap:.8rem;
     }
+
     .stack-list li{
       padding:.9rem 0;
       border-bottom:1px solid rgba(20,184,166,.14);
       color:var(--muted);
     }
+
     .stack-list strong{
       display:block;
       color:#fff;
       margin-bottom:.15rem;
     }
+
     .chip-row{
       display:flex;
       flex-wrap:wrap;
@@ -505,18 +624,21 @@
     .contact-grid{
       grid-template-columns:1fr .9fr;
     }
+
     .contact-list{
       list-style:none;
       display:grid;
       gap:.85rem;
       margin-top:1rem;
     }
+
     .contact-list li{
       display:flex;
       gap:.7rem;
       align-items:flex-start;
       color:var(--muted);
     }
+
     .contact-list i{
       color:var(--amber);
       margin-top:.18rem;
@@ -540,6 +662,7 @@
       transition:.22s ease;
       z-index:60;
     }
+
     .back-top.visible{
       opacity:1;
       visibility:visible;
@@ -551,6 +674,7 @@
       color:var(--muted);
       text-align:center;
     }
+
     .footer-line{
       border-top:1px solid rgba(20,184,166,.16);
       padding-top:1.1rem;
@@ -563,6 +687,7 @@
       z-index:0;
       overflow:hidden;
     }
+
     .floater{
       position:absolute;
       width:10px;
@@ -573,10 +698,12 @@
       opacity:.8;
       animation: drift linear infinite;
     }
+
     .floater.amber{
       background:radial-gradient(circle, rgba(242,213,116,.95), rgba(242,213,116,0));
       filter:drop-shadow(0 0 10px rgba(242,213,116,.35));
     }
+
     @keyframes drift{
       from{transform:translate3d(0,0,0) scale(.8)}
       to{transform:translate3d(var(--dx), var(--dy),0) scale(1.2)}
@@ -586,8 +713,10 @@
       .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .services-grid,.experience-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
+
     @media (max-width: 900px){
       .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+      .header-inner{position:relative}
       .nav{
         display:none;
         position:absolute;
@@ -595,8 +724,9 @@
         right:0;
         top:78px;
         padding:1rem;
-        background:rgba(7,16,31,.96);
-        border-bottom:1px solid rgba(20,184,166,.14);
+        background:#f2d574;
+        border-bottom:1px solid rgba(0,0,0,.12);
+        box-shadow:0 12px 26px rgba(0,0,0,.08);
       }
       .nav.open{
         display:flex;
@@ -616,13 +746,31 @@
     <div class="container header-inner">
       <a class="brand" href="#inicio">
         <span class="brand-mark brand-logo" aria-hidden="true">
-  <span class="logo-e">E</span>
+  <svg class="logo-svg" viewBox="0 0 64 64" role="img" aria-label="Logo E">
+    <defs>
+      <linearGradient id="eBg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0b1f3a"></stop>
+        <stop offset="100%" stop-color="#10284a"></stop>
+      </linearGradient>
+      <linearGradient id="eLine" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f2d574"></stop>
+        <stop offset="100%" stop-color="#14b8a6"></stop>
+      </linearGradient>
+    </defs>
+
+    <circle cx="32" cy="32" r="30" fill="url(#eBg)" />
+    <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(242,213,116,.38)" stroke-width="2" />
+    <path d="M21 18h22c3 0 5 2 5 5v2H27v7h15v5H27v7h21v2c0 3-2 5-5 5H21c-2.2 0-4-1.8-4-4V22c0-2.2 1.8-4 4-4z" fill="url(#eLine)"/>
+    <path d="M21 18h22" stroke="#f2d574" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M21 46h22" stroke="#14b8a6" stroke-width="1.4" stroke-linecap="round"/>
+  </svg>
 </span>
         <span class="brand-text">
           <strong>Elena Perandrés</strong>
           <span>Diseño web y marketing digital</span>
         </span>
       </a>
+
       <nav class="nav" id="nav">
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
@@ -632,9 +780,12 @@
         <a href="#estudios">Estudios</a>
         <a href="#contacto">Contacto</a>
       </nav>
+
       <div class="actions">
         <a class="btn btn-secondary" href="cv-Linkedin.pdf" target="_blank" rel="noopener noreferrer">Descargar CV</a>
-        <button class="icon-btn menu-btn" id="menuBtn" aria-controls="nav" aria-expanded="false" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-controls="nav" aria-expanded="false" aria-label="Abrir menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
     </div>
   </header>
@@ -676,13 +827,27 @@
     <section class="reveal" id="servicios">
       <div class="container">
         <div class="section-head">
-          <div><span class="section-tag">Servicios</span><h2 class="section-title">Lo que hago</h2></div>
-
+          <div>
+            <span class="section-tag">Servicios</span>
+            <h2 class="section-title">Lo que hago</h2>
+          </div>
         </div>
         <div class="services-grid">
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-laptop-code"></i></div><h3>Diseño web</h3><p>Webs corporativas, landing pages y portfolios con diseño responsive, jerarquía clara y enfoque comercial.</p></article>
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-chart-line"></i></div><h3>SEO y rendimiento</h3><p>Optimización técnica, contenido, velocidad de carga y estructura para mejorar visibilidad y experiencia.</p></article>
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-bullhorn"></i></div><h3>Marketing digital</h3><p>Ayudo a empresas a ganar visibilidad en Internet, atraer nuevos clientes y aumentar sus ventas</p></article>
+          <article class="panel-card reveal">
+            <div class="panel-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <h3>Diseño web</h3>
+            <p>Webs corporativas, landing pages y portfolios con diseño responsive, jerarquía clara y enfoque comercial.</p>
+          </article>
+          <article class="panel-card reveal">
+            <div class="panel-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>SEO y rendimiento</h3>
+            <p>Optimización técnica, contenido, velocidad de carga y estructura para mejorar visibilidad y experiencia.</p>
+          </article>
+          <article class="panel-card reveal">
+            <div class="panel-icon"><i class="fa-solid fa-bullhorn"></i></div>
+            <h3>Marketing digital</h3>
+            <p>Ayudo a empresas a ganar visibilidad en Internet, atraer nuevos clientes y aumentar sus ventas.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -690,16 +855,89 @@
     <section class="reveal" id="portfolio">
       <div class="container">
         <div class="section-head">
-          <div><span class="section-tag">Mi trabajo</span><h2 class="section-title">Portfolio seleccionado</h2></div>
-
+          <div>
+            <span class="section-tag">Mi trabajo</span>
+            <h2 class="section-title">Portfolio seleccionado</h2>
+          </div>
         </div>
         <div class="portfolio-grid">
-          <article class="portfolio-item reveal" data-delay="0"><img class="portfolio-image" src="img/Diseño sin título.png" alt="Tarax Digital"><div class="portfolio-overlay"><h3>Tarax Digital</h3><p>Portfolio y hub de recursos digitales.</p><div class="portfolio-tags"><span class="portfolio-tag">Marca personal</span><span class="portfolio-tag">SEO</span><span class="portfolio-tag">Frontend</span></div></div></article>
-          <article class="portfolio-item reveal" data-delay="80"><img class="portfolio-image" src="img/agencia-publicidad.png" alt="ImpulsaT Publicidad"><div class="portfolio-overlay"><h3>ImpulsaT Publicidad</h3><p>Servicios digitales y emprendimiento.</p><div class="portfolio-tags"><span class="portfolio-tag">WordPress</span><span class="portfolio-tag">Conversión</span><span class="portfolio-tag">Branding</span></div></div></article>
-          <article class="portfolio-item reveal" data-delay="160"><img class="portfolio-image" src="img/creaydecora.png" alt="Web negocio local"><div class="portfolio-overlay"><h3>Web para negocio local</h3><p>Presencia profesional y captación.</p><div class="portfolio-tags"><span class="portfolio-tag">Responsive</span><span class="portfolio-tag">Ventas</span><span class="portfolio-tag">UI</span></div></div></article>
-          <article class="portfolio-item reveal" data-delay="240"><img class="portfolio-image" src="img/cafetería.png" alt="Diseño para cafetería"><div class="portfolio-overlay"><h3>Diseño para cafetería</h3><p>Identidad visual con aroma a marca.</p><div class="portfolio-tags"><span class="portfolio-tag">Branding</span><span class="portfolio-tag">Diseño</span><span class="portfolio-tag">Web</span></div></div></article>
-          <article class="portfolio-item reveal" data-delay="320"><img class="portfolio-image" src="img/Brown and Beige Aesthetic Mood Collage  Poster (1).png" alt="Creatividad visual con IA"><div class="portfolio-overlay"><h3>Creatividad visual con IA</h3><p>Recursos visuales, prompts y piezas creativas.</p><div class="portfolio-tags"><span class="portfolio-tag">IA</span><span class="portfolio-tag">Canva</span><span class="portfolio-tag">Contenido</span></div></div></article>
-          <article class="portfolio-item reveal" data-delay="400"><img class="portfolio-image" src="img/2.png" alt="Selección creativa"><div class="portfolio-overlay"><h3>Selección creativa</h3><p>Piezas visuales para comunicar mejor.</p><div class="portfolio-tags"><span class="portfolio-tag">Visual</span><span class="portfolio-tag">Social</span><span class="portfolio-tag">Contenido</span></div></div></article>
+          <article class="portfolio-item reveal" data-delay="0">
+            <img class="portfolio-image" src="img/Diseño sin título.png" alt="Tarax Digital">
+            <div class="portfolio-overlay">
+              <h3>Tarax Digital</h3>
+              <p>Portfolio y hub de recursos digitales.</p>
+              <div class="portfolio-tags">
+                <span class="portfolio-tag">Marca personal</span>
+                <span class="portfolio-tag">SEO</span>
+                <span class="portfolio-tag">Frontend</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="portfolio-item reveal" data-delay="80">
+            <img class="portfolio-image" src="img/agencia-publicidad.png" alt="ImpulsaT Publicidad">
+            <div class="portfolio-overlay">
+              <h3>ImpulsaT Publicidad</h3>
+              <p>Servicios digitales y emprendimiento.</p>
+              <div class="portfolio-tags">
+                <span class="portfolio-tag">WordPress</span>
+                <span class="portfolio-tag">Conversión</span>
+                <span class="portfolio-tag">Branding</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="portfolio-item reveal" data-delay="160">
+            <img class="portfolio-image" src="img/creaydecora.png" alt="Web negocio local">
+            <div class="portfolio-overlay">
+              <h3>Web para negocio local</h3>
+              <p>Presencia profesional y captación.</p>
+              <div class="portfolio-tags">
+                <span class="portfolio-tag">Responsive</span>
+                <span class="portfolio-tag">Ventas</span>
+                <span class="portfolio-tag">UI</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="portfolio-item reveal" data-delay="240">
+            <img class="portfolio-image" src="img/cafetería.png" alt="Diseño para cafetería">
+            <div class="portfolio-overlay">
+              <h3>Diseño para cafetería</h3>
+              <p>Identidad visual con aroma a marca.</p>
+              <div class="portfolio-tags">
+                <span class="portfolio-tag">Branding</span>
+                <span class="portfolio-tag">Diseño</span>
+                <span class="portfolio-tag">Web</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="portfolio-item reveal" data-delay="320">
+            <img class="portfolio-image" src="img/Brown and Beige Aesthetic Mood Collage  Poster (1).png" alt="Creatividad visual con IA">
+            <div class="portfolio-overlay">
+              <h3>Creatividad visual con IA</h3>
+              <p>Recursos visuales, prompts y piezas creativas.</p>
+              <div class="portfolio-tags">
+                <span class="portfolio-tag">IA</span>
+                <span class="portfolio-tag">Canva</span>
+                <span class="portfolio-tag">Contenido</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="portfolio-item reveal" data-delay="400">
+            <img class="portfolio-image" src="img/2.png" alt="Selección creativa">
+            <div class="portfolio-overlay">
+              <h3>Selección creativa</h3>
+              <p>Piezas visuales para comunicar mejor.</p>
+              <div class="portfolio-tags">
+                <span class="portfolio-tag">Visual</span>
+                <span class="portfolio-tag">Social</span>
+                <span class="portfolio-tag">Contenido</span>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -707,13 +945,27 @@
     <section class="reveal" id="experiencia">
       <div class="container">
         <div class="section-head">
-          <div><span class="section-tag">Experiencia</span><h2 class="section-title">Trayectoria</h2></div>
-        
+          <div>
+            <span class="section-tag">Experiencia</span>
+            <h2 class="section-title">Trayectoria</h2>
+          </div>
         </div>
         <div class="experience-grid">
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-code"></i></div><h3>Diseñadora web freelance</h3><p>Creación de webs con WordPress, Elementor y frontend para proyectos personales y clientes.</p></article>
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-users"></i></div><h3>Community manager</h3><p>Gestión de comunidades, contenido y redes sociales con foco en métricas y engagement.</p></article>
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-video"></i></div><h3>Contenido audiovisual</h3><p>Producción y edición de vídeo, branding visual y piezas para redes y YouTube.</p></article>
+          <article class="panel-card reveal">
+            <div class="panel-icon"><i class="fa-solid fa-code"></i></div>
+            <h3>Diseñadora web freelance</h3>
+            <p>Creación de webs con WordPress, Elementor y frontend para proyectos personales y clientes.</p>
+          </article>
+          <article class="panel-card reveal">
+            <div class="panel-icon"><i class="fa-solid fa-users"></i></div>
+            <h3>Community manager</h3>
+            <p>Gestión de comunidades, contenido y redes sociales con foco en métricas y engagement.</p>
+          </article>
+          <article class="panel-card reveal">
+            <div class="panel-icon"><i class="fa-solid fa-video"></i></div>
+            <h3>Contenido audiovisual</h3>
+            <p>Producción y edición de vídeo, branding visual y piezas para redes y YouTube.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -724,9 +976,8 @@
           <span class="section-tag">Sobre mí</span>
           <h2 class="section-title" style="margin-bottom:1rem">Quién soy</h2>
           <p style="color:var(--muted);line-height:1.8">Soy una profesional digital con perfil híbrido entre diseño web, marketing digital y creación de contenido. Mi fortaleza está en unir una parte visual cuidada con una base técnica real, para construir proyectos más claros, útiles y preparados para crecer online.</p>
-          <p style="color:var(--muted);line-height:1.8;margin-top:1rem">Trabajo especialmente bien con WordPress y Elementor, pero también puedo maquetar y personalizar con HTML, CSS y JavaScript. Además, aplico SEO, estructura de contenidos y optimización de rendimiento para que una web no solo sea bonita, sino efectiva.</p><br>
-          Dirijo dos canales de youtube con más de 13k subscriptores.
-          <p style="color:var(--muted);line-height:1.8;margin-top:1rem">Mi experiencia en YouTube, redes sociales y formación, me aporta una visión más completa de marca, audiencia, narrativa y captación de atención. <br>Fecha de nacimiento: 17 de mayo de 1972.</p>
+          <p style="color:var(--muted);line-height:1.8;margin-top:1rem">Trabajo especialmente bien con WordPress y Elementor, pero también puedo maquetar y personalizar con HTML, CSS y JavaScript. Además, aplico SEO, estructura de contenidos y optimización de rendimiento para que una web no solo sea bonita, sino efectiva.</p>
+          <p style="color:var(--muted);line-height:1.8;margin-top:1rem">Dirijo dos canales de YouTube con más de 13k suscriptores. Mi experiencia en YouTube, redes sociales y formación me aporta una visión más completa de marca, audiencia, narrativa y captación de atención. Fecha de nacimiento: 17 de mayo de 1972.</p>
           <div class="chip-row">
             <span class="tag">Granada, España</span>
             <span class="tag">Disponible para remoto o presencial</span>
@@ -737,8 +988,8 @@
           <ul class="stack-list">
             <li><strong>Especialización principal</strong>Diseño web, WordPress con Elementor, SEO y marketing digital.</li>
             <li><strong>Perfil complementario</strong>Marketing digital, analítica, branding visual y edición de vídeo.</li>
-           <li><strong>Base técnica</strong>HTML5, CSS3, JavaScript, responsive design, CSS Grid, Flexbox y accesibilidad básica.</li>
-           <li><strong>Herramientas y despliegue</strong>WordPress, Elementor, SEO on-page, Git, GitHub y Netlify.</li>
+            <li><strong>Base técnica</strong>HTML5, CSS3, JavaScript, responsive design, CSS Grid, Flexbox y accesibilidad básica.</li>
+            <li><strong>Herramientas y despliegue</strong>WordPress, Elementor, SEO on-page, Git, GitHub y Netlify.</li>
             <li><strong>Objetivo</strong>Ayudar a marcas y proyectos a verse mejor, comunicar mejor y convertir mejor.</li>
           </ul>
         </aside>
@@ -748,13 +999,27 @@
     <section class="reveal" id="estudios">
       <div class="container">
         <div class="section-head">
-          <div><span class="section-tag">Formación</span><h2 class="section-title">Estudios</h2></div>
-
+          <div>
+            <span class="section-tag">Formación</span>
+            <h2 class="section-title">Estudios</h2>
+          </div>
         </div>
         <div class="services-grid">
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-graduation-cap"></i></div><h3>Desarrollo de Aplicaciones con Tecnologías Web</h3><p>Certificado de Profesionalidad (Nivel 3), Academia Atlántida, 580 horas presenciales, 2024.</p></article>
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-bullseye"></i></div><h3>Community Manager y SEO</h3><p>Especialización en Community Manager y Posicionamiento Web SEO, Cámara de Comercio de Granada, 260 horas, 2022.</p></article>
-          <article class="panel-card reveal"><div class="panel-icon"><i class="fa-solid fa-laptop"></i></div><h3>Competencias Digitales Avanzadas</h3><p>Academia Galilea, 120 horas, 2023. Formación en competencias, herramientas y productividad digital.</p></article>
+          <article class="panel-card reveal">
+            <div class="panel-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h3>Desarrollo de Aplicaciones con Tecnologías Web</h3>
+            <p>Certificado de Profesionalidad (Nivel 3), Academia Atlántida, 580 horas presenciales, 2024.</p>
+          </article>
+          <article class="panel-card reveal">
+            <div class="panel-icon"><i class="fa-solid fa-bullseye"></i></div>
+            <h3>Community Manager y SEO</h3>
+            <p>Especialización en Community Manager y Posicionamiento Web SEO, Cámara de Comercio de Granada, 260 horas, 2022.</p>
+          </article>
+          <article class="panel-card reveal">
+            <div class="panel-icon"><i class="fa-solid fa-laptop"></i></div>
+            <h3>Competencias Digitales Avanzadas</h3>
+            <p>Academia Galilea, 120 horas, 2023. Formación en competencias, herramientas y productividad digital.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -790,7 +1055,10 @@
   </main>
 
   <a class="back-top" href="#inicio" id="backTop" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></a>
-  <footer><div class="container footer-line">© Elena Perandrés Molino · Portfolio profesional </div></footer>
+
+  <footer>
+    <div class="container footer-line">© Elena Perandrés Molino · Portfolio profesional</div>
+  </footer>
 
   <script>
     const nav = document.getElementById('nav');
@@ -798,6 +1066,8 @@
     const backTop = document.getElementById('backTop');
     const reveal = document.querySelectorAll('.reveal');
     const floaters = document.getElementById('floaters');
+    const navLinks = document.querySelectorAll('.nav a');
+    const sections = document.querySelectorAll('main section[id]');
 
     for (let i = 0; i < 18; i++) {
       const s = document.createElement('span');
@@ -816,7 +1086,16 @@
       const open = nav.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
+
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+    const header = document.querySelector('.header');
+
+const toggleHeaderBlur = () => {
+  header.classList.toggle('scrolled', window.scrollY > 12);
+};
+
+toggleHeaderBlur();
+window.addEventListener('scroll', toggleHeaderBlur, { passive: true });
 
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -827,11 +1106,22 @@
         }
       });
     }, { threshold: 0.14 });
+
     reveal.forEach(el => io.observe(el));
 
     const toggleBack = () => backTop.classList.toggle('visible', window.scrollY > 480);
     toggleBack();
     window.addEventListener('scroll', toggleBack, { passive: true });
+
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+        }
+      });
+    }, { threshold: 0.45, rootMargin: '-15% 0px -45% 0px' });
+
+    sections.forEach(section => spy.observe(section));
   </script>
 </body>
 </html>
