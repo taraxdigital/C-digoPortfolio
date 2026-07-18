@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ElenaWeb | Diseño web, IA creativa y marketing digital</title>
+<meta name="description" content="Portfolio profesional de Elena Perandrés Molino. Diseño web en WordPress, Elementor, SEO, IA creativa, vídeo, storytelling visual y proyectos para marcas y empresas.">
+<meta name="keywords" content="diseño web, WordPress, Elementor, SEO, IA creativa, storytelling visual, vídeo para empresas, portfolio profesional">
+<link rel="canonical" href="https://tudominio.com/">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="ElenaWeb | Portfolio creativo y profesional">
+<meta property="og:description" content="Diseño web moderno, IA creativa, narrativa visual, vídeo y servicios digitales para marcas y empresas.">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Elena Perandrés Molino",
+  "jobTitle": "Diseñadora web, frontend y creativa digital con IA",
+  "areaServed": "Granada, España",
+  "sameAs": ["https://www.behance.net/", "https://www.linkedin.com/", "https://www.instagram.com/"]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap">
+<style>
+:root{
+  --c-primary:#0e0f26;
+  --c-secondary:#1f5964;
+  --c-accent-1:#ddbf55;
+  --c-accent-2:#ff9b00;
+  --c-surface:rgba(255,255,255,0.06);
+  --c-surface-strong:rgba(255,255,255,0.10);
+  --c-text:#f5f7ff;
+  --c-muted:rgba(245,247,255,0.72);
+  --c-border:rgba(245,247,255,0.14);
+
+  --f-heading:'Clash Display','Space Grotesk',sans-serif;
+  --f-body:'Satoshi','Inter',sans-serif;
+  --f-accent:'Space Grotesk',sans-serif;
+
+  --radius-card:20px;
+  --shadow-deep:0 30px 60px -20px rgba(0,0,0,0.55);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--c-primary);
+  color:var(--c-text);
+  font-family:var(--f-body);
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{font-family:var(--f-heading);font-weight:600;letter-spacing:-0.02em;line-height:1.08;}
+.eyebrow{font-family:var(--f-accent);text-transform:uppercase;letter-spacing:0.18em;font-size:0.72rem;color:var(--c-accent-1);font-weight:600;}
+.container{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,48px);}
+section{position:relative;padding:clamp(80px,12vw,140px) 0;}
+
+/* ---------- BACKGROUND FX ---------- */
+.bg-noise{
+  position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.35;pointer-events:none;z-index:0;}
+.orb-1{width:420px;height:420px;background:var(--c-secondary);top:-120px;left:-100px;}
+.orb-2{width:360px;height:360px;background:var(--c-accent-2);top:20%;right:-140px;opacity:0.22;}
+.orb-3{width:300px;height:300px;background:var(--c-accent-1);bottom:0;left:30%;opacity:0.15;}
+
+/* ---------- NAV ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:22px 0;transition:all .4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+header.scrolled{
+  padding:14px 0;
+  background:rgba(14,15,38,0.66);
+  backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-bottom:1px solid var(--c-border);
+}
+nav{display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-heading);font-size:1.3rem;font-weight:700;}
+.logo-mark{
+  width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(135deg,var(--c-accent-1),var(--c-accent-2));
+  display:flex;align-items:center;justify-content:center;
+  color:var(--c-primary);font-weight:700;font-size:1.15rem;font-family:var(--f-heading);
+}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{
+  font-size:0.92rem;font-weight:500;color:var(--c-muted);position:relative;padding:6px 0;
+  transition:color .25s;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--c-accent-1);
+  transition:width .3s var(--ease);
+}
+.nav-links a:hover,.nav-links a.active{color:var(--c-text);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-cta{
+  padding:10px 22px;border-radius:100px;background:var(--c-accent-2);color:var(--c-primary);
+  font-weight:600;font-size:0.88rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 24px -8px rgba(255,155,0,0.5);}
+.burger{display:none;width:26px;height:20px;position:relative;cursor:pointer;}
+.burger span{position:absolute;left:0;width:100%;height:2px;background:var(--c-text);transition:.3s;}
+.burger span:nth-child(1){top:0;}
+.burger span:nth-child(2){top:9px;}
+.burger span:nth-child(3){top:18px;}
+.burger.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+
+@media(max-width:880px){
+  .nav-links{
+    position:fixed;top:0;right:-100%;height:100vh;width:min(78vw,340px);
+    background:rgba(14,15,38,0.97);backdrop-filter:blur(20px);
+    flex-direction:column;justify-content:center;align-items:flex-start;
+    padding:40px;gap:1.6rem;transition:right .45s var(--ease);
+    border-left:1px solid var(--c-border);
+  }
+  .nav-links.open{right:0;}
+  .nav-cta{display:none;}
+  .burger{display:block;}
+}
+
+/* ---------- REVEAL ANIM ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-zoom{opacity:0;transform:scale(0.94);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal-zoom.in{opacity:1;transform:scale(1);}
+.stagger > *{transition-delay:calc(var(--i,0)*90ms);}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:100vh;display:flex;align-items:center;padding-top:120px;
+}
+.hero-inner{display:grid;gap:40px;position:relative;z-index:2;}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+.chip{
+  padding:8px 16px;border-radius:100px;background:var(--c-surface);border:1px solid var(--c-border);
+  font-size:0.8rem;font-family:var(--f-accent);color:var(--c-muted);
+}
+.hero h1{font-size:clamp(2.4rem,6vw,4.6rem);max-width:14ch;}
+.hero h1 .accent{background:linear-gradient(100deg,var(--c-accent-1),var(--c-accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p.subtitle{margin-top:22px;font-size:1.15rem;color:var(--c-muted);max-width:52ch;}
+.hero-ctas{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:100px;
+  font-weight:600;font-size:0.95rem;font-family:var(--f-accent);cursor:pointer;border:none;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s;
+}
+.btn-primary{background:linear-gradient(100deg,var(--c-accent-2),var(--c-accent-1));color:var(--c-primary);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 34px -12px rgba(255,155,0,0.55);}
+.btn-ghost{background:var(--c-surface);border:1px solid var(--c-border);color:var(--c-text);}
+.btn-ghost:hover{background:var(--c-surface-strong);transform:translateY(-3px);}
+
+.stats{display:flex;gap:clamp(24px,5vw,56px);margin-top:56px;flex-wrap:wrap;}
+.stat b{display:block;font-family:var(--f-heading);font-size:2.1rem;color:var(--c-accent-1);}
+.stat span{font-size:0.82rem;color:var(--c-muted);}
+
+/* ---------- SECTION HEAD ---------- */
+.section-head{max-width:640px;margin-bottom:56px;}
+.section-head h2{font-size:clamp(2rem,4.2vw,2.9rem);margin-top:10px;}
+.section-head p{color:var(--c-muted);margin-top:14px;font-size:1.05rem;}
+
+/* ---------- SERVICIOS ---------- */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;}
+.service-card{
+  background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-card);
+  padding:34px 28px;position:relative;overflow:hidden;cursor:default;
+  transition:transform .45s var(--ease),background .4s,border-color .4s;
+}
+.service-card::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(140deg,var(--c-accent-1),transparent 40%);
+  opacity:0;transition:opacity .4s;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+.service-card:hover{transform:translateY(-8px);background:var(--c-surface-strong);border-color:rgba(221,191,85,0.4);}
+.service-card:hover::before{opacity:1;}
+.service-num{font-family:var(--f-accent);color:var(--c-accent-1);font-size:0.8rem;opacity:0.8;}
+.service-card h3{font-size:1.25rem;margin:18px 0 10px;}
+.service-card p{color:var(--c-muted);font-size:0.94rem;}
+.service-icon{
+  width:46px;height:46px;border-radius:12px;background:rgba(255,155,0,0.14);
+  display:flex;align-items:center;justify-content:center;color:var(--c-accent-2);margin-bottom:6px;
+}
+
+/* ---------- PORTFOLIO ---------- */
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+.p-item{
+  position:relative;border-radius:var(--radius-card);overflow:hidden;aspect-ratio:4/3;cursor:pointer;
+  border:1px solid var(--c-border);
+}
+.p-item .p-bg{
+  position:absolute;inset:0;background:linear-gradient(150deg,var(--c-secondary),var(--c-primary) 70%);
+  transition:transform .6s var(--ease);
+}
+.p-item::after{
+  content:attr(data-tag);position:absolute;top:16px;left:16px;font-family:var(--f-accent);
+  font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;background:rgba(14,15,38,0.55);
+  backdrop-filter:blur(6px);padding:6px 12px;border-radius:100px;border:1px solid var(--c-border);
+}
+.p-overlay{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;
+  background:linear-gradient(0deg,rgba(14,15,38,0.92) 10%,transparent 65%);
+  opacity:0;transform:translateY(12px);transition:opacity .4s var(--ease),transform .4s var(--ease);
+}
+.p-item:hover .p-overlay{opacity:1;transform:translateY(0);}
+.p-item:hover .p-bg{transform:scale(1.08);}
+.p-overlay h4{font-size:1.15rem;}
+.p-overlay span{font-size:0.85rem;color:var(--c-muted);}
+
+/* Modal */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(5,5,15,0.75);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;z-index:1000;
+  opacity:0;pointer-events:none;transition:opacity .35s var(--ease);padding:24px;
+}
+.modal-backdrop.open{opacity:1;pointer-events:auto;}
+.modal{
+  background:var(--c-primary);border:1px solid var(--c-border);border-radius:24px;max-width:560px;width:100%;
+  padding:40px;transform:translateY(20px) scale(0.97);transition:transform .4s var(--ease);
+}
+.modal-backdrop.open .modal{transform:translateY(0) scale(1);}
+.modal-close{position:absolute;top:24px;right:28px;cursor:pointer;font-size:1.4rem;color:var(--c-muted);}
+
+/* ---------- CARRUSEL IA-CUENTOS ---------- */
+.carousel-wrap{position:relative;}
+.carousel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:22px;padding-bottom:8px;scrollbar-width:none;}
+.carousel-track::-webkit-scrollbar{display:none;}
+.c-slide{
+  scroll-snap-align:start;flex:0 0 min(560px,84vw);border-radius:var(--radius-card);overflow:hidden;
+  border:1px solid var(--c-border);position:relative;aspect-ratio:16/10;
+}
+.c-slide .p-bg{background:linear-gradient(160deg,var(--c-accent-1) -10%,var(--c-primary) 60%);}
+.c-slide .p-overlay{opacity:1;transform:none;background:linear-gradient(0deg,rgba(14,15,38,0.92) 20%,transparent 70%);}
+.c-tag{display:inline-block;margin-bottom:10px;font-family:var(--f-accent);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-accent-1);}
+.carousel-nav{display:flex;gap:12px;justify-content:flex-end;margin-top:20px;}
+.c-btn{
+  width:48px;height:48px;border-radius:50%;background:var(--c-surface);border:1px solid var(--c-border);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.3s;
+}
+.c-btn:hover{background:var(--c-accent-2);color:var(--c-primary);box-shadow:0 10px 22px -8px rgba(255,155,0,0.5);}
+
+/* ---------- SOBRE MI ---------- */
+.about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:center;}
+.about-photo{
+  aspect-ratio:4/5;border-radius:24px;background:linear-gradient(160deg,var(--c-secondary),var(--c-primary));
+  border:1px solid var(--c-border);position:relative;overflow:hidden;
+}
+.about-photo::after{
+  content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(221,191,85,0.25),transparent 60%);
+}
+.skills-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+@media(max-width:880px){.about-grid{grid-template-columns:1fr;}}
+
+/* ---------- PROCESO ---------- */
+.process-list{display:grid;gap:0;border-top:1px solid var(--c-border);}
+.p-step{
+  display:grid;grid-template-columns:80px 1fr;gap:28px;padding:32px 0;border-bottom:1px solid var(--c-border);
+  align-items:start;
+}
+.p-step .idx{font-family:var(--f-heading);font-size:1.6rem;color:var(--c-accent-1);opacity:0.7;}
+.p-step h3{font-size:1.2rem;margin-bottom:6px;}
+.p-step p{color:var(--c-muted);font-size:0.94rem;max-width:60ch;}
+
+/* ---------- CONTACTO ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+.contact-form{display:grid;gap:16px;}
+.contact-form input,.contact-form textarea{
+  width:100%;padding:15px 18px;border-radius:12px;background:var(--c-surface);
+  border:1px solid var(--c-border);color:var(--c-text);font-family:var(--f-body);font-size:0.95rem;
+  transition:border-color .3s,background .3s;
+}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--c-accent-1);background:var(--c-surface-strong);}
+.contact-form textarea{resize:vertical;min-height:130px;}
+.contact-info{display:flex;flex-direction:column;gap:22px;}
+.info-row{display:flex;gap:16px;align-items:flex-start;}
+.info-icon{
+  width:44px;height:44px;flex:none;border-radius:12px;background:var(--c-surface);border:1px solid var(--c-border);
+  display:flex;align-items:center;justify-content:center;color:var(--c-accent-1);
+}
+@media(max-width:880px){.contact-grid{grid-template-columns:1fr;}}
+
+/* ---------- FOOTER ---------- */
+footer{
+  position:relative;padding:56px 0 28px;border-top:1px solid var(--c-border);
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,0.02));
+}
+.footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;padding-bottom:36px;}
+.footer-links{display:flex;gap:2.4rem;flex-wrap:wrap;list-style:none;}
+.footer-links a{color:var(--c-muted);font-size:0.9rem;}
+.footer-links a:hover{color:var(--c-text);}
+.social-row{display:flex;gap:12px;margin-top:16px;}
+.social-row a{
+  width:38px;height:38px;border-radius:50%;background:var(--c-surface);border:1px solid var(--c-border);
+  display:flex;align-items:center;justify-content:center;transition:.3s;
+}
+.social-row a:hover{background:var(--c-accent-1);color:var(--c-primary);}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:24px;border-top:1px solid var(--c-border);font-size:0.8rem;color:var(--c-muted);}
+.back-top{
+  position:fixed;bottom:28px;right:28px;width:50px;height:50px;border-radius:50%;
+  background:var(--c-accent-2);color:var(--c-primary);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:90;opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:.35s var(--ease);box-shadow:0 14px 28px -10px rgba(255,155,0,0.6);
+}
+.back-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .reveal,.reveal-zoom,.p-bg,.service-card,.btn,.c-btn{transition:none!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-noise"></div>
+
+<header id="siteHeader">
+  <div class="container">
+    <nav>
+      <a href="#inicio" class="logo"><span class="logo-mark">E</span> ElenaWeb</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#ia-cuentos">Cuentos &amp; IA</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="#contacto" class="nav-cta">Hablemos de tu proyecto</a>
+      <div class="burger" id="burger"><span></span><span></span><span></span></div>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="inicio" class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="container hero-inner">
+    <div class="reveal in">
+      <div class="chips">
+        <span class="chip">Diseño web</span>
+        <span class="chip">IA creativa</span>
+        <span class="chip">SEO</span>
+        <span class="chip">Storytelling visual</span>
+      </div>
+      <h1>Diseño web <span class="accent">atrevido</span> para marcas que quieren destacar</h1>
+      <p class="subtitle">Creo webs, piezas visuales y contenido digital con una mezcla de estrategia, diseño, IA y narrativa visual.</p>
+      <div class="hero-ctas">
+        <a href="#portfolio" class="btn btn-primary">Ver portfolio</a>
+        <a href="#contacto" class="btn btn-ghost">Contactar</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>+10</b><span>años de experiencia digital</span></div>
+        <div class="stat"><b>WordPress</b><span>&amp; Elementor</span></div>
+        <div class="stat"><b>IA + Vídeo</b><span>storytelling visual</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICIOS ================= -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Servicios</span>
+      <h2>En qué puedo ayudarte</h2>
+      <p>Del diseño a la publicación: soluciones completas para tu presencia digital.</p>
+    </div>
+    <div class="services-grid stagger">
+      <div class="service-card reveal" style="--i:0">
+        <div class="service-icon">◆</div>
+        <span class="service-num">01</span>
+        <h3>Diseño web en WordPress y Elementor</h3>
+        <p>Webs a medida, responsive y rápidas, construidas para convertir visitas en clientes.</p>
+      </div>
+      <div class="service-card reveal" style="--i:1">
+        <div class="service-icon">▲</div>
+        <span class="service-num">02</span>
+        <h3>SEO y estructura para posicionar</h3>
+        <p>Arquitectura, metadatos y contenido pensados para que Google entienda tu web.</p>
+      </div>
+      <div class="service-card reveal" style="--i:2">
+        <div class="service-icon">✦</div>
+        <span class="service-num">03</span>
+        <h3>Creatividad con IA para imágenes y vídeo</h3>
+        <p>Piezas visuales generadas y editadas con IA, con dirección de arte propia.</p>
+      </div>
+      <div class="service-card reveal" style="--i:3">
+        <div class="service-icon">◈</div>
+        <span class="service-num">04</span>
+        <h3>Landing pages y webs para empresas</h3>
+        <p>Páginas de conversión enfocadas en un único objetivo: captar clientes.</p>
+      </div>
+      <div class="service-card reveal" style="--i:4">
+        <div class="service-icon">❖</div>
+        <span class="service-num">05</span>
+        <h3>Storytelling visual para cuentos y narrativa</h3>
+        <p>Historias contadas con imagen y vídeo para marcas, cuentos y proyectos personales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section id="portfolio">
+  <div class="orb orb-3"></div>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Portfolio seleccionado</h2>
+      <p>Una muestra de proyectos recientes. Haz clic para ver el detalle.</p>
+    </div>
+    <div class="portfolio-grid stagger">
+      <div class="p-item reveal-zoom" data-tag="Web" style="--i:0" onclick="openModal('Webs corporativas','Diseño y desarrollo de sitios institucionales orientados a resultados, con foco en velocidad y SEO técnico.')">
+        <div class="p-bg"></div>
+        <div class="p-overlay"><h4>Webs corporativas</h4><span>WordPress · Elementor</span></div>
+      </div>
+      <div class="p-item reveal-zoom" data-tag="Branding" style="--i:1" onclick="openModal('Branding visual','Sistemas de identidad visual: logo, paleta, tipografía y aplicaciones de marca.')">
+        <div class="p-bg"></div>
+        <div class="p-overlay"><h4>Branding visual</h4><span>Identidad de marca</span></div>
+      </div>
+      <div class="p-item reveal-zoom" data-tag="IA" style="--i:2" onclick="openModal('Proyectos de IA','Creatividad generativa aplicada a imagen y vídeo, con dirección de arte y postproducción.')">
+        <div class="p-bg"></div>
+        <div class="p-overlay"><h4>Proyectos de IA</h4><span>Imagen &amp; vídeo generativo</span></div>
+      </div>
+      <div class="p-item reveal-zoom" data-tag="Vídeo" style="--i:3" onclick="openModal('Contenido audiovisual','Edición y producción de vídeo con DaVinci Resolve para redes y campañas.')">
+        <div class="p-bg"></div>
+        <div class="p-overlay"><h4>Contenido audiovisual</h4><span>DaVinci Resolve</span></div>
+      </div>
+      <div class="p-item reveal-zoom" data-tag="Local" style="--i:4" onclick="openModal('Diseño para negocios locales','Webs y presencia digital para comercios y negocios de proximidad.')">
+        <div class="p-bg"></div>
+        <div class="p-overlay"><h4>Diseño para negocios locales</h4><span>Webs &amp; ficha local</span></div>
+      </div>
+      <div class="p-item reveal-zoom" data-tag="Social" style="--i:5" onclick="openModal('Piezas para redes y campañas','Contenido visual pensado para Instagram, YouTube y campañas puntuales.')">
+        <div class="p-bg"></div>
+        <div class="p-overlay"><h4>Piezas para redes y campañas</h4><span>Instagram · YouTube</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CUENTOS & IA ================= -->
+<section id="ia-cuentos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cuentos &amp; IA</span>
+      <h2>Cuentos, narrativa y piezas visuales</h2>
+      <p>Imágenes y vídeos creados para historias, comerciales y marcas.</p>
+    </div>
+    <div class="carousel-wrap reveal">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="c-slide"><div class="p-bg"></div>
+          <div class="p-overlay"><span class="c-tag">Épico</span><h4>Los que desafiaron el fin del mundo</h4><span>Serie narrativa vikinga</span></div>
+        </div>
+        <div class="c-slide"><div class="p-bg"></div>
+          <div class="p-overlay"><span class="c-tag">Cuento</span><h4>Relatos con IA generativa</h4><span>Ilustración + narrativa</span></div>
+        </div>
+        <div class="c-slide"><div class="p-bg"></div>
+          <div class="p-overlay"><span class="c-tag">Comercial</span><h4>Piezas para marcas</h4><span>Storytelling de producto</span></div>
+        </div>
+        <div class="c-slide"><div class="p-bg"></div>
+          <div class="p-overlay"><span class="c-tag">Cinemático</span><h4>Vídeo de atmósfera</h4><span>Dirección de arte 8K</span></div>
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <div class="c-btn" onclick="scrollCarousel(-1)">←</div>
+        <div class="c-btn" onclick="scrollCarousel(1)">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SOBRE MI ================= -->
+<section id="sobre-mi">
+  <div class="container about-grid">
+    <div class="about-photo reveal-zoom"></div>
+    <div class="reveal">
+      <span class="eyebrow">Sobre mí</span>
+      <h2 style="margin-top:10px;font-size:clamp(1.9rem,3.6vw,2.6rem);">Perfil híbrido entre diseño, marketing y creatividad con IA</h2>
+      <p style="color:var(--c-muted);margin-top:18px;">Diseñadora web y creativa digital especializada en frontend, WordPress y Elementor, con un pie en el marketing digital y otro en la narrativa visual. Combino precisión técnica con dirección de arte para que cada proyecto tenga estrategia y carácter.</p>
+      <div class="skills-list">
+        <span class="chip">HTML · CSS · JS</span>
+        <span class="chip">WordPress</span>
+        <span class="chip">Elementor</span>
+        <span class="chip">SEO</span>
+        <span class="chip">DaVinci Resolve</span>
+        <span class="chip">IA creativa</span>
+        <span class="chip">Marketing digital</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESO ================= -->
+<section id="proceso">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Metodología</span>
+      <h2>Cómo trabajo</h2>
+    </div>
+    <div class="process-list reveal">
+      <div class="p-step"><span class="idx">01</span><div><h3>Escucho tu idea y objetivos</h3><p>Entiendo qué necesita tu marca y qué resultado buscas antes de diseñar nada.</p></div></div>
+      <div class="p-step"><span class="idx">02</span><div><h3>Propongo estructura y estilo visual</h3><p>Defino arquitectura de contenido, paleta y dirección de arte alineadas con tu marca.</p></div></div>
+      <div class="p-step"><span class="idx">03</span><div><h3>Diseño la web y optimizo contenido</h3><p>Construyo en WordPress/Elementor cuidando velocidad, SEO y experiencia móvil.</p></div></div>
+      <div class="p-step"><span class="idx">04</span><div><h3>Publico y reviso rendimiento/SEO</h3><p>Pongo la web en marcha y hago seguimiento de posicionamiento y conversión.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section id="contacto">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Contacto</span>
+      <h2 style="margin-top:10px;">Cuéntame qué necesitas</h2>
+      <p style="color:var(--c-muted);margin-top:14px;">Te propongo una solución visual y funcional para tu proyecto.</p>
+      <form class="contact-form" style="margin-top:32px;" onsubmit="event.preventDefault();alert('Conecta este formulario con tu plugin de formularios en Elementor (ej. Elementor Forms) para recibir mensajes reales.');">
+        <input type="text" placeholder="Tu nombre" required>
+        <input type="email" placeholder="Tu email" required>
+        <textarea placeholder="Cuéntame sobre tu proyecto" required></textarea>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;">Enviar mensaje</button>
+      </form>
+    </div>
+    <div class="contact-info reveal">
+      <div class="info-row"><div class="info-icon">✉</div><div><h4>Email</h4><span style="color:var(--c-muted);">hola@tudominio.com</span></div></div>
+      <div class="info-row"><div class="info-icon">☎</div><div><h4>WhatsApp</h4><span style="color:var(--c-muted);">+34 000 000 000</span></div></div>
+      <div class="info-row"><div class="info-icon">◎</div><div><h4>Ubicación</h4><span style="color:var(--c-muted);">Granada, España</span></div></div>
+      <a href="#contacto" class="btn btn-ghost" style="margin-top:10px;width:fit-content;">Pedir presupuesto</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MODAL ================= -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()">
+  <div class="modal" style="position:relative;">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <h3 id="modalTitle" style="font-size:1.5rem;margin-bottom:14px;"></h3>
+    <p id="modalText" style="color:var(--c-muted);"></p>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="#inicio" class="logo"><span class="logo-mark">E</span> ElenaWeb</a>
+        <p style="color:var(--c-muted);max-width:32ch;margin-top:14px;font-size:0.9rem;">Diseño web, IA creativa y experiencias que convierten.</p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/" aria-label="Instagram">IG</a>
+          <a href="https://www.linkedin.com/" aria-label="LinkedIn">IN</a>
+          <a href="https://www.behance.net/" aria-label="Behance">BE</a>
+        </div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#ia-cuentos">Cuentos &amp; IA</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Elena Perandrés Molino — ElenaWeb</span>
+      <span>hola@tudominio.com · Granada, España</span>
+    </div>
+  </div>
+</footer>
+
+<div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Header scroll state
+const header = document.getElementById('siteHeader');
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+  backTop.classList.toggle('show', window.scrollY > 600);
+});
+
+// Mobile menu
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  burger.classList.remove('open'); navLinks.classList.remove('open');
+}));
+
+// Scroll reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal, .reveal-zoom').forEach(el => io.observe(el));
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navA = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+});
+
+// Carousel
+function scrollCarousel(dir){
+  const track = document.getElementById('carouselTrack');
+  const slide = track.querySelector('.c-slide');
+  const gap = 22;
+  track.scrollBy({ left: dir * (slide.offsetWidth + gap), behavior: 'smooth' });
+}
+
+// Portfolio modal
+function openModal(title, text){
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalText').textContent = text;
+  document.getElementById('modalBackdrop').classList.add('open');
+}
+function closeModal(){
+  document.getElementById('modalBackdrop').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
